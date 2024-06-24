@@ -1,0 +1,11 @@
+.text {
+    font-family: "Montserrat" , sans-serif;
+}
+.header {
+    text-align: center;
+    width: 100%;
+    font-size: 35px;
+}
+span {
+    text-decoration: underline;
+}

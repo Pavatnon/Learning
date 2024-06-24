@@ -1,0 +1,22 @@
+img {
+    margin: 50px;
+}
+.one {
+    object-fit: contain;
+    object-position: center;
+    width: 300px;
+    border-radius: 15px;
+}
+.two {
+    object-fit: contain;
+    object-position: center;
+    width: 300px;
+    
+}
+.three {
+    object-fit: contain;
+    object-position: center;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}

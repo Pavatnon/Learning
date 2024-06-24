@@ -1,0 +1,68 @@
+<style>
+    div {
+        margin-bottom: 100px;
+    }
+
+    .pagination > button{
+        padding: 5px;
+    }
+    .pagination > a {
+        margin: 5px;
+    }
+    button{
+        padding: 10px 20px 10px;
+        background: green;
+        color: white;
+        border: none;
+        font-weight: bold;
+    }
+    .stretch > button {
+        transition: padding 0.4s;
+    }
+    .stretch > button:hover {
+        padding: 15px 30px 15px;
+    }
+    .tdClick > button {
+        box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.384);
+        margin-left: 2px;
+        margin-bottom: 2px;
+    } 
+    .tdClick > button:active {
+        box-shadow:none;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
+    .mgtogle > button {
+        margin: 15px;
+        transition: padding 0.5s,
+                    margin 0.5s;
+    }
+    .mgtogle > button:hover {
+        padding: 10px 30px 10px;
+        margin: 5px;
+    }
+</style>
+
+<body>
+    <div class="pagination">
+        <button>Back</button>
+        <a href="">1</a>
+        <a href="">2</a>
+        <a href="">3</a>
+        <a href="">4</a>
+        <a href="">5</a>
+        <button>Next</button>
+    </div>
+    <div class="stretch">
+        <button>Stretch</button>
+    </div>
+    <div class="tdClick">
+        <button>Shadow</button>
+    </div>
+    <div class="mgtogle">
+        <button>One</button>
+        <button>Two</button>
+        <button>Three</button>
+    </div>
+
+</body>

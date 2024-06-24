@@ -1,0 +1,65 @@
+JavaScript : In The Website
+-----------------------------------------------------------------------
+inline : เป็นการแทรก java script เข้า ไปใน บรรทัด ของ  html 
+
+external : คือการ เขียน JavaScript ผ่าน Script แยกที่สร้างขึ้นมา
+
+internal : คือการสร้างพื้นที่ ในการเขียน JavaScript ขึ้เนมาใน <body> ผ่าน tag <script> javascript here </script>
+
+
+
+-----------------------------------------------------------------------
+JavaScript : Inline 
+-----------------------------------------------------------------------
+onload : --> <body onload = "alert('Hello');"></body>
+
+
+
+
+-----------------------------------------------------------------------
+JavaScript : Internal 
+-----------------------------------------------------------------------
+
+<script> javascript here </script>
+
+
+
+-----------------------------------------------------------------------
+JavaScript : External 
+-----------------------------------------------------------------------
+
+how to call javascript 
+<script src="./index.js"></script>
+
+JavaScript: Selector
+
+การเลือกเป้าหมายในการจัดการของ java script นั้นไม่เหมือนใน css ที่สามารถเลือกได้เลยโดยตรง แต่เราต้องค่อยๆ กล่าวถึง childelement ของ documaent แล้วเก็บไว้ในตัวแปล
+เช่น var variableName = document. childElement ....;  ส่วนที่เรากล่าวถึงจะถูกเก็บไว้ในตัวแปล และนำตัวแปลไปใช้งานได้
+
+querySelector("element ที่จะเลือก"); เป็นการเลือก tag Html ในการเปลี่ยนแปลง (เป็นการเลือก property โดยตรง) และยังสามารถใช้ เครื่องหมาย selector ที่คล้ายกับ css ได้
+getElementByTagName("tag html"); เป็นการเลือก property แล้วนำมาเก็บไว้ใน array
+getElementByClassName("class name");
+getElementById("id name");
+
+.classList --> ใช้ดูคลาสที่อยู่ Html
+.add --> สามารถ addclass เข้าไปได้ เพื่อทำงานร่วมกัน css
+.remove --> ลบ classที่อยู่ Html
+.toggle --> ถ้าคลาส ถูกใช้ไปแล้ว ให้ลบออก, ถ้ายังไม่ได้ใช้ ให้เพิ่มเข้า
+
+
+text-------------
+
+.innerHtml --> จะเอาทุกองค์ประกอบของ html ที่เลือกออกมา ข้อดีคือเรา สามารถเพิ่ม tag htmlเข้าไปได้ด้วย
+.textContent -->  เอาแค่ text 
+
+
+attributes------------
+
+.attributes --> เรียกดู attributes ใน tag html
+.getAttributes -->  เรียกดู attributes ที่เราเลือกในhtml เช่น .getAttributes("href");
+.setAttributes -->	เปลี่ยน ค่าของ attributes ที่เลือก เช่น .setAttributes("attributes ที่จะเปลี่ยน" ," ค่าของ attributes ที่ต้องการเปลี่ยน")
+
+ 
+
+
+

@@ -1,0 +1,24 @@
+.gridcontainer {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 1fr 1fr 1fr;
+    row-gap: 15px;
+    height: 100vh;
+}
+.gridcontainer > .conone {
+    display: grid;
+    grid-template-columns: 200px 75px;
+    height: 20px;
+}
+.gridcontainer > .contwo {
+    display: grid;
+    grid-template-columns: 50px 1fr 75px;
+    height: 20px;
+}
+.gridcontainer > .conthree {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 20px 20px;
+    row-gap: 10px;
+    column-gap: 10px;
+}

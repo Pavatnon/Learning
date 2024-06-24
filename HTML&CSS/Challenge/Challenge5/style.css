@@ -1,0 +1,91 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+}
+.con-one, .con-two {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: inherit;
+}
+.log-one {
+    text-align: center;
+    width: 450px;
+    height: 300px;
+}
+.log-two {
+    text-align: center;
+    width: 450px;
+    height: 300px;
+}
+.inline {
+    width: inherit;
+    display: inline-block;
+}
+.block {
+    display: block;
+    width: inherit;
+}
+.input {
+    padding: 12px 10px 12px;
+    border-radius: 7px;
+    border-width: 1px;
+    font-size: 15px;
+    margin-bottom: 15px;
+    border-style: solid;
+    border-color: gray;
+}
+.inname {
+    margin-top: 20px;
+    width: 30%;
+}
+.inmail {
+    width: 65%;
+}
+.log-one > button {
+    width: 70%;
+    font-size: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    border-style: none;
+    background-color: rgb(66, 139, 250);
+    color: white;
+    font-weight: bold;
+}
+.log-two > .block > .input {
+    width: 350px;
+    border-radius: 0px;
+    border-style: none;
+    background-color: rgb(243, 243, 243);
+    height: 30px;
+}
+.log-two > .block > h1 {
+    font-family: Arial;
+    font-size: 35px;
+    text-align: start;
+    margin-left: 40px;
+}
+.log-two > .inline {
+    width: 100%;
+    text-align: start;
+    margin-left: 40px;
+}
+.log-two > .inline > button {
+    margin-top: 15px;
+    font-size: 15px;
+    padding: 15px 20px 15px;
+    border-style: none;
+    
+}
+.log-two > .inline > .but-one  {
+    background-color: black;
+    color: white;
+}
+.log-two > .inline > .but-two {
+    font-weight: bold;
+    background-color: rgb(219, 218, 217);
+    margin-left: 15px;
+}

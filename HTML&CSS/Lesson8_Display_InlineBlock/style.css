@@ -1,0 +1,43 @@
+div {
+    display: flex;
+    width: 100%;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+.one > div {
+    display: block;
+    width: 300px;
+    height: 150px;
+    text-align: center;
+}
+.one > div > input {
+    margin: 5px;
+}
+.two > div > p {
+    display: inline-block;
+    width: 200px;
+    text-align: start;
+}
+.two > div > p,
+.two > div > button {
+    margin: 5px;
+}
+
+.three > div {
+    display: block;
+    width: 500px;
+    text-align: center;
+    
+}
+.three > div > h1 {
+    font-size: 4rem;
+}
+.three > div > input {
+    width: 80%;
+    height: 30px;
+    border-radius: 50px;
+    border-width: 1px;
+    padding: 0px 20px 0px;
+}

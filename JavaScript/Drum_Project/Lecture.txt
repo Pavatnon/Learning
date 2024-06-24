@@ -1,0 +1,55 @@
+-----------------------------------
+JavaScrpt: addEventlisten
+-----------------------------------
+.addEventListener("type", listener): ใช้เมื่อ ต้องการเรียกใช้ function ผ่าน Event ต่างๆ เช่น การกดปุ่ม
+
+parameter -->    type คือ ประเภทของ Event
+		listener คือ function ที่ต้องการให้ทำงาน เมื่อ เกิด Event
+
+
+
+-----------------------------------
+JavaScrpt: sound
+-----------------------------------
+basic logic --> var variablename = new Audio('audio path');   
+			variablename.play();
+
+
+
+
+-----------------------------------
+JavaScript: switch, case
+-----------------------------------
+switch (case for condition) {
+    case value:
+        
+        break;
+
+    default: (else ใน if stratement)
+        break;
+}
+
+-----------------------------------
+JavaScript: Properties
+-----------------------------------
+
+คือการสร้าง obj ให้กับตัวแปล เช่น var variablename = {
+						name: "",
+						type: ""
+	
+						}
+ทั้งนี้เราสามารถ สร้าง function ที่ใช้ในการ new Obj ขึ้นมาได้ Constracter function
+
+function Car(type, color, max){
+	this.type = type;
+	this.color = color;
+	this.max = max;
+}
+
+การ นำไปใช้   --> var newCar = new Car("4wheels", "Rad", 125);
+สื่งที่เกิดขึ้นเราจะได้ Obj 
+newCar = {
+	type: "4wheels",
+	color: "Rad",
+	max: 125
+} 

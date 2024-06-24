@@ -1,0 +1,37 @@
+JavaScript: jQuery
+
+คือ frameork ที่ใช้ใน JavaScript คล้ายๆ กับ boststrap ใน css 
+------------------------------------
+jQuery: selector , element
+------------------------------------
+$(); ---> document.seclecQuery(""); , document.seclecQueryAll("")
+
+.css("cssAttribute", "valueForChange")--> ใช้เปลี่ยน css ในตำแน่งที่เลือก. 
+.addClass("classForadded"); --> ใช้เพิ่มคลาส เข้าไปใน tag html ที่เลือก.
+.reemoveClass("classForremove")--> ใช้ลบคลาส ใน tag html ที่เลือก.
+.hasClass("classForremove") --> ค้นหาคลาสที่ต้องการในตำแหน่งที่เลือก.
+
+.text("newText"); --> ใช้ในการเปลี่ยน text ในตำแหน่งที่เลือก.
+.html("<htmltag>value<htmltag/>") --> ใข้เพิ่ม TagHtml ในตำแหน่ง ที่เลือก.
+.attr("Attribute", "value"); --> เป็นการเพิ่ม attribute เข้าไปใน tag html.
+
+.click(function(){}); --> เหมือน addEventListener("click", finction callback(){}); ใน javascript vanila.
+.keypress(function(){}); --> เหมือน addEventListener("keypress", finction(event){}); ใน javascript vanila.
+
+.on("eventtype", finction callback(){}); ==== addEventListener("eventtype", finction callback(){});
+
+
+.before(<html><html>)->บน		|
+.after(<html><html>)->ล่าง		|-->  ใช้ในการ เพิ่ม tag html ที่ต้องการ ไปในตำแหน่งที่ต้องการ ของ obj ที่เลือก.
+.prepand(<html><html>)->ซ้าย		|-->
+.appand(<html><html>)->ขวา		|
+
+"selector".hide() --> ซ่อน องค์ประกอบที่เลือก.
+"selector".show() --> show องค์ประกอบที่เลือก.
+"selector".fadeOut() -->  fade ซ่อน องค์ประกอบที่เลือก.
+"selector".fadeIn() --> fade show องค์ประกอบที่เลือก.
+"selector".toggle() --> สามารถ เปิด-ปิด องค์ประกอบที่เลือก.
+"selector".fadeToggle()--> สามารถ fade และ เปิด-ปิด องค์ประกอบที่เลือก.
+"selector".slideUp() --> slide ขึ้น แล้วซ่อน obj ที่เลือก
+"selector".slideDown()--ฬ slide ลง แล้วซ่อน obj ที่เลือก
+ 

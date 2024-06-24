@@ -1,0 +1,63 @@
+.col {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 50px;
+}
+.headbar {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: 40px;
+    gap: 30%;
+    background-color: rgb(155, 124, 226);
+    color: white;
+    justify-content: space-between;
+    padding: 10px 15px 10px;
+    align-items: center;
+    font-family: Arial;
+    font-weight: bold;
+}
+.headbar > input {
+    flex: 1;
+    width: 0px;
+    padding-inline: 20px;
+    border-radius: 50px;
+    height: 35px;
+    border-style: none;
+    font-weight: bold;
+}
+.headbar > button {
+    height: 35px;
+    border: 1px solid  white;
+    background-color: rgb(155, 124, 226);
+    color: white;
+    border-radius: 3px;
+    width: 100px;
+}
+
+.notitation {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: auto;
+    padding-inline: 15px;
+    border: 1px solid gray;
+    border-radius: 15px;
+
+    font-weight: bold;
+    font-family: Arial;
+
+}
+.notitation > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.number {
+    color: white;
+    background-color: rgb(21, 129, 231);
+    padding: 5px 10px 5px;
+    border-radius: 50px;
+}

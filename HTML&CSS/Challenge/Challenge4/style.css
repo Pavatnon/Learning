@@ -1,0 +1,84 @@
+div {
+    display: flex;
+    width: 500px;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+.one > input {
+    font-size: 18px;
+    padding: 15px 15px 15px;
+    border-radius: 8px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.603);
+}
+.two > input {
+    text-align: start;
+    font-size: 18px;
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.288);
+    padding: 10px 15px 10px;
+    width: 500px;
+}
+
+.three  > div {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+    align-items: start;
+    
+}
+.three > div > input{
+    width: 90%;
+    height: 28px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    align-self: center;
+}
+.three > div > p {
+    margin-left: 15px;
+    color: gray;
+}
+.three > div > button {
+    align-self: center;
+    color: white;
+    background-color: rgb(70, 110, 221);
+    border-style: none;
+    width: 90%;
+    font-size: 18px;
+    padding: 15px 0px 15px;
+    border-radius: 50px;
+}
+
+.four > .xbox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+
+}
+.xbox > .imgcontainer  {
+    width: 20%;
+    margin-left: 10%;
+}
+.xbox > .imgcontainer > img {
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;    
+}
+.xtext {
+    font-size: 20px;
+    text-align: start;
+    color: gray;
+}
+.xbutton > button {
+    background-color: rgb(109, 179, 245);
+    color: white;
+    border-style: none;
+    font-size: 18px;
+    padding: 10px 15px 10px;
+    border-radius: 50px;
+}
