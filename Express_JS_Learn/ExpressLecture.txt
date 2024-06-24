@@ -23,3 +23,8 @@ get('endpoint', (req, res) => { endpoint--> path "/something" ที่อยู
 });
 
 
+midlewere --> เป็นส่วนที่ใช่ในการ ควบคุม reuest ที่ถูกส่งเข้ามาในส่วนของ server ทำให้เราสามารถ ประยุกต์ นำข้อมูลที่request เข้ามานั้นไปใช้ต่อได้
+
+.sendFile('path') --> เป็นการ res ไฟล์ตามpath ออกไป
+
+
