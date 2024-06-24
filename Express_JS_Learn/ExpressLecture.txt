@@ -17,5 +17,9 @@ HTTP request
 
 HTTP request Syntax
 
-get('path', (req, res) => {
+get('endpoint', (req, res) => { endpoint--> path "/something" ที่อยู่ใน URL
+					--> req คือส่วนที่ client ขอเข้ามาในserver แล้ว callback ผ่าน request
+					--> res คือส่วนที่ server ส่งออกไปให้ผั่ง client เห็น
 });
+
+
