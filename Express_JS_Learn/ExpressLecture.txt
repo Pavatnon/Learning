@@ -1,0 +1,21 @@
+Express เป็น frameork ที่ช่วยในการสร้าง server 
+
+netstat -ano | findstr "LISTENING" --> command ที่เอาไว้ ดู Port
+
+.listen(port , () => {}) --> listen คือ finction ที่ใช้ในการ สร้าง server ขึ้นมา โดย parameter port เป็นตัว กำหนด port ของ server
+    port--> เป็นตัวกำหนด ตำแหน่ง ของ server ที่เราจะใช้ในการส่งข้อมูล ระหว่าง client แลพ server
+    callback function  -> จะทำงานกฌต่อเมื่อ เราได้ทำการสร้าง server เสร็จเรียบร้อยแล้ว
+
+
+HTTP request
+
+.get --> ใช้ส่งคำขอ เพื่อรับ ข้อมูลจาก sever
+.post --> ใช้ส่งคำขอ เพื่อ ส่งข้อมูลไปยัง server
+.put   |--> โดยรวมแล้วคือการ ส้งคำขอ เพื่อ อัพเดทข้อมูลจาก server --> Update ทั้งหมด
+.patch |--> Update บ้างส่วน หรือเฉพาะส่วนที่ต้องการ
+.delete --> ส่ง คำขอไป server เพื่อลบข้อมูล
+
+HTTP request Syntax
+
+get('path', (req, res) => {
+});
