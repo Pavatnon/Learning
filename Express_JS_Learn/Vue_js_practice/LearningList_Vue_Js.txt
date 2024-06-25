@@ -1,0 +1,42 @@
+Vue Instance
+    การสร้างและใช้งาน Vue instance
+    การเชื่อมโยงข้อมูล (Data Binding)
+    การทำงานกับ Directive ต่างๆ เช่น v-bind, v-model, v-for, v-if เป็นต้น
+
+Component
+    การสร้าง Component ใน Vue.js
+    Props: การส่งข้อมูลจาก parent component ไปยัง child component
+    Events: การส่งข้อมูลจาก child component ไปยัง parent component
+
+Computed Properties
+    การใช้ Computed Properties สำหรับการคำนวณค่าที่จะแสดงผลใน template
+
+Methods
+    การใช้ Methods สำหรับการทำงานต่างๆ ใน Vue instance หรือ Component
+
+Lifecycle Hooks
+    แนวทางการใช้งาน Lifecycle Hooks เช่น created, mounted, updated, destroyed
+
+Routing with Vue Router
+    การใช้ Vue Router เพื่อจัดการเส้นทาง (routing) ในแอปพลิเคชัน Vue.js
+
+State Management with Vuex
+    การจัดการสถานะแอปพลิเคชัน (state management) ด้วย Vuex
+
+HTTP Requests with Axios
+    การทำ HTTP Requests เช่น GET, POST, PUT, DELETE ด้วย Axios หรือ Vue Resource
+
+Forms and Input Handling
+    การใช้งานฟอร์มและการจัดการข้อมูลของ input
+
+Filters
+    การใช้งาน Filters เพื่อกำหนดรูปแบบของข้อมูลที่แสดงผลใน template
+
+Mixins
+    การใช้งาน Mixins เพื่อทำให้ Component สามารถนำโค้ดที่ reusable ไปใช้ได้หลายที่
+
+Testing
+    แนวทางการทดสอบแอปพลิเคชัน Vue.js เช่น unit testing, integration testing
+
+Deployment
+    ขั้นตอนการนำแอปพลิเคชัน Vue.js ไปใช้งานจริงบนเซิร์ฟเวอร์
