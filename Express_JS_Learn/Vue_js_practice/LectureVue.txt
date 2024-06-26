@@ -22,3 +22,10 @@ syntax htmlwithVue
 
 v-for ="", ---> forloob ใน html attribute
 v-bind:attribute  หรือ :attribute --> ทำให้เราสามารถใช้ vue ร่วมกับ attribute ใน html ได้
+
+Event
+
+v-on:Event  หรือ @event--> เป็น syntax ที่เรียนกใช้ event ของ vue 
+
+method event
+.prevent --> เพื่อทำ event แล้วจะไม่มีการ reload

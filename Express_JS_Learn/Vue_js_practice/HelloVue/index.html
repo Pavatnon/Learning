@@ -8,32 +8,38 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <h1 id="title">{{title}}</h1>
-    <h2>link to another Webpage</h2>
-    <ol id="listlink">
-        <li v-for="link in links">
-            <a :href = "link.url">{{link.linkTo}}</a>
-        </li>
-    </ol>
+    <div class="d-flex flex-row justify-content-around mt-3">
+        <div v-for="(link, index) in links" :key="index">
+            <button @click.prevent = "activePage = index" class="px-5">{{link.titlelink}}</button>
+        </div>
+    </div>
+    
+
+    <div class="d-flex flex-column justify-content-center align-items-center" style="height: 100vh;" >
+        <h1>{{page[activePage].title}}</h1>
+        <p>{{page[activePage].des}}</p>
+
+    </div>
 </body>
 <script>
     Vue.createApp({
-        data() {
-            return {
-               title:'Webpage from Vue' 
-            }
-        },
-    }).mount('#title');
-    Vue.createApp({
         data(){
             return{
-                links:[
-                    {linkTo:'Youtube', url:'https://www.youtube.com'},
-                    {linkTo:'Google', url:'https://www.google.com'}
+                activePage: 0,
+                links: [
+                    {titlelink:'Home'},
+                    {titlelink:'About'},
+                    {titlelink:'Contact'}
+                ],
+                page: [
+                    {title:'HomePage', des:'this is homepage'},
+                    {title:'AboutPage', des:'this is aboutpage'},
+                    {title:'ContactPage', des:'this is contactpage'}
+
                 ]
             }
         }
-    }).mount('#listlink');
+    }).mount('body');
 </script>
 
 </html>
