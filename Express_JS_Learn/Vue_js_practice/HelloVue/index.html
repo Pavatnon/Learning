@@ -3,12 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>helloVue</title>
+    <title>Hello Vue</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="app">{{ message }}</div>
-    
-    <script src="./index.js"  charset="UTF-8"></script>
+    <div id="app" class="container">
+        <h1>{{title}}</h1>
+    </div>
+
+    <div class="container" id="loobtest">
+        <p v-for = "num in nums">number: {{num}}</p>
+    </div>
 </body>
+
+<script>
+    Vue.createApp({
+        data () {
+            return{
+                nums:['number1','number2','number3','number4','number5']
+            }
+        },
+    }).mount('#loobtest')
+    Vue.createApp({
+        data() {
+            return {
+                title: "Hello Vue"   
+            }
+        },
+    }).mount('#app');
+
+    
+</script>
 </html>
