@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudentCard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div class="flex flex-row w-full gap-10 my-5 justify-around">
+        <div v-for="(Std, index) in Stds" :key = "index">
+            <div class="border-solid border-2 border-black rounded-md px-10">
+                <button @click = "activeIndex = index">{{Std.name}}</button>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-center items-center h-screen w-full">
+        <div class="flex flex-col border-solid border-2 border-black rounded-md px-10 py-2 ">
+            <p>StudentName: {{Stds[activeIndex].name}}</p>
+            <p>StudentID: {{Stds[activeIndex].id}}</p>
+            <p>Year of study: {{Stds[activeIndex].year}} </p>
+        </div>
+    </div>
+        
+    
+
+
+<script>
+    Vue.createApp({
+        data(){
+            return {
+                activeIndex:0,
+                Stds:[
+                    {name:"Pavat",id:"111-1111-1111",year:"1111"},
+                    {name:"Nattarada",id:"222-2222-2222",year:"2222"},
+                    {name:"Thirada",id:"333-3333-3333",year:"333"}
+                ]
+            }
+        }
+    }).mount('body');
+</script>
+    
+</body>
+</html>
