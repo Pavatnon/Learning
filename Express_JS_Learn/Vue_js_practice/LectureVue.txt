@@ -7,17 +7,18 @@ syntax
 Vue.createapp()--> เป็นารอ้างถึง vue obj และเรียกใช้ libary creatapp
 ทั้งนี้ เราสามารถที่จะ ใช้import ได้ --> import {creatapp} = Vue;
 
-vue with html tag 
-v-for ="", ---> forloob ใน html attribute
-
-
 libary
 createapp({option}).amount("path"); --> เป็นกการสร้าง vue instance ในรูปแบบเริ่มต้น เพื่อเริ่ม สร้าง obj หรือ fuction ที่อยู่ภายใน
 
 
-option 
+syntax option 
 data(){
     return{
         obj   ----> เป้น option ที่ใช้ในการ return obj ออกไป
     };
 }
+
+syntax htmlwithVue
+
+v-for ="", ---> forloob ใน html attribute
+v-bind:attribute  หรือ :attribute --> ทำให้เราสามารถใช้ vue ร่วมกับ attribute ใน html ได้

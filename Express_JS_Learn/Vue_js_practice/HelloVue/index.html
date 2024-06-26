@@ -8,31 +8,32 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    <div id="app" class="container">
-        <h1>{{title}}</h1>
-    </div>
-
-    <div class="container" id="loobtest">
-        <p v-for = "num in nums">number: {{num}}</p>
-    </div>
+    <h1 id="title">{{title}}</h1>
+    <h2>link to another Webpage</h2>
+    <ol id="listlink">
+        <li v-for="link in links">
+            <a :href = "link.url">{{link.linkTo}}</a>
+        </li>
+    </ol>
 </body>
-
 <script>
-    Vue.createApp({
-        data () {
-            return{
-                nums:['number1','number2','number3','number4','number5']
-            }
-        },
-    }).mount('#loobtest')
     Vue.createApp({
         data() {
             return {
-                title: "Hello Vue"   
+               title:'Webpage from Vue' 
             }
         },
-    }).mount('#app');
-
-    
+    }).mount('#title');
+    Vue.createApp({
+        data(){
+            return{
+                links:[
+                    {linkTo:'Youtube', url:'https://www.youtube.com'},
+                    {linkTo:'Google', url:'https://www.google.com'}
+                ]
+            }
+        }
+    }).mount('#listlink');
 </script>
+
 </html>
