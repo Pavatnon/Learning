@@ -10,10 +10,15 @@
 <body>
     <div class="flex flex-row w-full gap-10 my-5 justify-around">
         <div v-for="(Std, index) in Stds" :key = "index">
-            <div class="border-solid border-2 border-black rounded-md px-10">
-                <button @click = "activeIndex = index">{{Std.name}}</button>
+            <div>
+                <button
+                class="border-solid border-2 border-black rounded-md px-10"
+                :class = "{'border-red-500': activeIndex == index}"
+                 @click = "activeIndex = index"
+                 >{{Std.name}}</button>
             </div>
         </div>
+        
     </div>
     <div class="flex justify-center items-center h-screen w-full">
         <div class="flex flex-col border-solid border-2 border-black rounded-md px-10 py-2 ">
