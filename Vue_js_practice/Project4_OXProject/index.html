@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OX_Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div class="flex justify-center items-center bg-red-500 w-full h-screen">
+        <div class="w-[600px] h-[600px] bg-white sr-only" id="playStatge">
+            <div class="grid grid-cols-3 grid-rows-3 gap-x-[10px] gap-y-[10px] p-1">
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="1"
+                :class= "{'bg-gray-500': check[0].active == disable }"
+                @click = "turnSwap1(); winCheck();"
+                >
+                    <img :src= "showPin[0]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="2"
+                :class= "{'bg-gray-500': check[1].active == disable }"
+                @click = "turnSwap2(); winCheck();"
+                >
+                    <img :src= "showPin[1]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="3"
+                :class= "{'bg-gray-500': check[2].active == disable }"
+                @click = "turnSwap3(); winCheck();"
+                >
+                    <img :src= "showPin[2]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="4"
+                :class= "{'bg-gray-500': check[3].active == disable }"
+                @click = "turnSwap4(); winCheck();"
+                >
+                    <img :src= "showPin[3]" > 
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="5"
+                :class= "{'bg-gray-500': check[4].active == disable }"
+                @click = "turnSwap5(); winCheck();"
+                >
+                    <img :src= "showPin[4]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="6"
+                :class= "{'bg-gray-500': check[5].active == disable }"
+                @click = "turnSwap6(); winCheck();"
+                >
+                    <img :src= "showPin[5]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="7"
+                :class= "{'bg-gray-500': check[6].active == disable }"
+                @click = "turnSwap7(); winCheck();"
+                >
+                    <img :src= "showPin[6]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="8"
+                :class= "{'bg-gray-500': check[7].active == disable }"
+                @click = "turnSwap8(); winCheck();"
+                >
+                    <img :src= "showPin[7]" >
+                </button>
+                <button class="w-[190px] h-[190px] bg-gray-400" :key="9"
+                :class= "{'bg-gray-500': check[8].active == disable }"
+                @click = "turnSwap9(); winCheck();"
+                >
+                    <img :src= "showPin[8]" >
+                </button>
+            </div>
+        </div>
+        <div class="flex flex-col w-[800px] h-[400px] bg-red-300 justify-center items-center">
+            <div class="">
+                <h1>{{}}</h1>
+            </div>
+        </div>
+    </div>
+
+    
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    turn: 0,
+                    disable:"false",
+                    winstatge: "false",
+                    winText:[
+                        "X Win",
+                        "O Win"
+                    ],
+                    showPin:[
+                        "","","",
+                        "","","",
+                        "","","",
+
+                    ],
+                    check:[
+                        {active: "true", inPin: ""},{active: "true", inPin: ""},{active: "true", inPin: ""},
+                        {active: "true", inPin: ""},{active: "true", inPin: ""},{active: "true", inPin: ""},
+                        {active: "true", inPin: ""},{active: "true", inPin: ""},{active: "true", inPin: ""}
+                    ]
+                    
+                }
+            },
+           
+            methods: {
+                turnSwap1(){
+                    let turn = 0;
+                    if (this.check[0].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[0] = "./Asset/X.png";
+                            this.check[0].active = "false"
+                            this.check[0].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[0] = "./Asset/O.png"; 
+                            this.check[0].active = "false"
+                            this.check[0].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap2(){
+                    let turn = 0;
+                    if (this.check[1].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[1] = "./Asset/X.png";
+                            this.check[1].active = "false"
+                            this.check[1].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[1] = "./Asset/O.png"; 
+                            this.check[1].active = "false"
+                            this.check[1].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap3(){
+                    let turn = 0;
+                    if (this.check[2].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[2] = "./Asset/X.png";
+                            this.check[2].active = "false"
+                            this.check[2].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[2] = "./Asset/O.png"; 
+                            this.check[2].active = "false"
+                            this.check[2].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap4(){
+                    let turn = 0;
+                    if (this.check[3].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[3] = "./Asset/X.png";
+                            this.check[3].active = "false"
+                            this.check[3].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[3] = "./Asset/O.png"; 
+                            this.check[3].active = "false"
+                            this.check[3].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap5(){
+                    let turn = 0;
+                    if (this.check[4].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[4] = "./Asset/X.png";
+                            this.check[4].active = "false"
+                            this.check[4].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[4] = "./Asset/O.png"; 
+                            this.check[4].active = "false"
+                            this.check[4].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap6(){
+                    let turn = 0;
+                    if (this.check[5].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[5] = "./Asset/X.png";
+                            this.check[5].active = "false"
+                            this.check[5].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[5] = "./Asset/O.png"; 
+                            this.check[5].active = "false"
+                            this.check[5].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap7(){
+                    let turn = 0;
+                    if (this.check[6].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[6] = "./Asset/X.png";
+                            this.check[6].active = "false"
+                            this.check[6].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[6] = "./Asset/O.png"; 
+                            this.check[6].active = "false"
+                            this.check[6].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap8(){
+                    let turn = 0;
+                    if (this.check[7].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[7] = "./Asset/X.png";
+                            this.check[7].active = "false"
+                            this.check[7].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[7] = "./Asset/O.png"; 
+                            this.check[7].active = "false"
+                            this.check[7].inPin = "O";
+                        }
+                    }
+                        
+                },
+                turnSwap9(){
+                    let turn = 0;
+                    if (this.check[8].active === "true") {
+                        if(this.turn == 0){
+                            turn = 1;
+                        }
+                        this.turn = turn;
+
+                        if(turn == 0){
+                            this.showPin[8] = "./Asset/X.png";
+                            this.check[8].active = "false"
+                            this.check[8].inPin = "X";
+                        }
+                        if(turn == 1){
+                            this.showPin[8] = "./Asset/O.png"; 
+                            this.check[8].active = "false"
+                            this.check[8].inPin = "O";
+                        }
+                    }
+                        
+                },
+
+                winCheck(){
+                    // X Check--------------------------------------------------
+                        // vertical  ------------------------------------------
+                    if(this.check[0].inPin == "X" & this.check[1].inPin == "X" & this.check[2].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[3].inPin == "X" & this.check[4].inPin == "X" & this.check[5].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[6].inPin == "X" & this.check[7].inPin == "X" & this.check[8].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                        // horizontal ------------------------------------------
+                    if(this.check[0].inPin == "X" & this.check[3].inPin == "X" & this.check[6].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[1].inPin == "X" & this.check[4].inPin == "X" & this.check[7].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[2].inPin == "X" & this.check[5].inPin == "X" & this.check[8].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                        //Cross ------------------------------------------
+                    if(this.check[0].inPin == "X" & this.check[4].inPin == "X" & this.check[8].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[2].inPin == "X" & this.check[4].inPin == "X" & this.check[6].inPin == "X"){
+                        console.log('XWIn');
+                        this.winstatge = "true";
+                    };
+
+                    // O  Check ------------------------------------------------
+                    if(this.check[0].inPin == "O" & this.check[1].inPin == "O" & this.check[2].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[3].inPin == "O" & this.check[4].inPin == "O" & this.check[5].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[6].inPin == "O" & this.check[7].inPin == "O" & this.check[8].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                        // horizontal ------------------------------------------
+                    if(this.check[0].inPin == "O" & this.check[3].inPin == "O" & this.check[6].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[1].inPin == "O" & this.check[4].inPin == "O" & this.check[7].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[2].inPin == "O" & this.check[5].inPin == "O" & this.check[8].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                        //Cross ------------------------------------------
+                    if(this.check[0].inPin == "O" & this.check[4].inPin == "O" & this.check[8].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                    if(this.check[2].inPin == "O" & this.check[4].inPin == "O" & this.check[6].inPin == "O"){
+                        console.log('OWIn');
+                        this.winstatge = "true";
+                    };
+                }
+            },
+        }).mount('body');
+    </script>
+</body>
+</html>
