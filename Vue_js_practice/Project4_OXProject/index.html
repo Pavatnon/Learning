@@ -9,7 +9,8 @@
 </head>
 <body>
     <div class="flex justify-center items-center bg-red-500 w-full h-screen">
-        <div class="w-[600px] h-[600px] bg-white sr-only" id="playStatge">
+        <div class="w-[600px] h-[600px] bg-white " id="playStatge"
+            :class="{'sr-only': winstatge == 'true'}">
             <div class="grid grid-cols-3 grid-rows-3 gap-x-[10px] gap-y-[10px] p-1">
                 <button class="w-[190px] h-[190px] bg-gray-400" :key="1"
                 :class= "{'bg-gray-500': check[0].active == disable }"
@@ -67,9 +68,18 @@
                 </button>
             </div>
         </div>
-        <div class="flex flex-col w-[800px] h-[400px] bg-red-300 justify-center items-center">
-            <div class="">
-                <h1>{{}}</h1>
+        <div class="flex flex-col w-[800px] h-[400px] bg-red-300 justify-center items-center rounded-[15px]"
+            :class = "{'sr-only':winstatge == 'false'}">
+            <div class="m-5 font-bold text-[100px]">
+                <h1 v-if="winX === 'true'">{{winText[0]}}</h1>
+                <h1 v-if="winO === 'true'">{{winText[1]}}</h1>
+                <h1 v-if="draw === 'true'">{{winText[2]}}</h1>
+            </div>
+            <div>
+                <button class="bg-gray-400 px-5 py-1 rounded-[5px] font-bold border hover:px-6 hover:transition-all"
+                @click = "resetButon();"
+                >Next
+                </button>
             </div>
         </div>
     </div>
@@ -82,9 +92,13 @@
                     turn: 0,
                     disable:"false",
                     winstatge: "false",
+                    winX: "",
+                    winO: "",
+                    draw: "",
                     winText:[
                         "X Win",
-                        "O Win"
+                        "O Win",
+                        "Draw"
                     ],
                     showPin:[
                         "","","",
@@ -296,76 +310,109 @@
                     // X Check--------------------------------------------------
                         // vertical  ------------------------------------------
                     if(this.check[0].inPin == "X" & this.check[1].inPin == "X" & this.check[2].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
+
                     };
                     if(this.check[3].inPin == "X" & this.check[4].inPin == "X" & this.check[5].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[6].inPin == "X" & this.check[7].inPin == "X" & this.check[8].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                         // horizontal ------------------------------------------
                     if(this.check[0].inPin == "X" & this.check[3].inPin == "X" & this.check[6].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[1].inPin == "X" & this.check[4].inPin == "X" & this.check[7].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[2].inPin == "X" & this.check[5].inPin == "X" & this.check[8].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                         //Cross ------------------------------------------
                     if(this.check[0].inPin == "X" & this.check[4].inPin == "X" & this.check[8].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[2].inPin == "X" & this.check[4].inPin == "X" & this.check[6].inPin == "X"){
-                        console.log('XWIn');
+                        this.winX = "true";
                         this.winstatge = "true";
                     };
 
                     // O  Check ------------------------------------------------
                     if(this.check[0].inPin == "O" & this.check[1].inPin == "O" & this.check[2].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[3].inPin == "O" & this.check[4].inPin == "O" & this.check[5].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[6].inPin == "O" & this.check[7].inPin == "O" & this.check[8].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                         // horizontal ------------------------------------------
                     if(this.check[0].inPin == "O" & this.check[3].inPin == "O" & this.check[6].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[1].inPin == "O" & this.check[4].inPin == "O" & this.check[7].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[2].inPin == "O" & this.check[5].inPin == "O" & this.check[8].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                         //Cross ------------------------------------------
                     if(this.check[0].inPin == "O" & this.check[4].inPin == "O" & this.check[8].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
                     if(this.check[2].inPin == "O" & this.check[4].inPin == "O" & this.check[6].inPin == "O"){
-                        console.log('OWIn');
+                        this.winO = "true";
                         this.winstatge = "true";
                     };
+
+                    
+        
+                    if(this.check[0].active == "false" & this.check[1].active == "false" & this.check[2].active == "false" &
+                        this.check[3].active == "false" & this.check[4].active == "false" & this.check[5].active == "false" &
+                        this.check[6].active == "false" & this.check[7].active == "false" & this.check[8].active == "false"){
+
+                            if(this.winO == "true" || this.winX == "true"){
+                                this.draw = "false";
+                            }
+                            else{
+                                 this.draw = "true";
+                            }
+
+
+                            this.winstatge = "true";
+                    }
+
+                    
+                },
+                resetButon(){
+                    this.winstatge = "false";
+                    for (let i = 0; i < this.check.length; i++) {
+                        this.check[i].inPin = "";
+                        this.check[i].active = "true";
+                        this.showPin[i] = "";
+                    }
+                    this.winX = "";
+                    this.winO = "";
+                    this.draw = "";
                 }
+
+
             },
         }).mount('body');
     </script>
