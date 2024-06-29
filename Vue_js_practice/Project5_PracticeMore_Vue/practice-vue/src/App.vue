@@ -1,19 +1,32 @@
+  <script setup>
+      import Headbar from './components/Headbar.vue';
+      import CardCom from './components/CardCom.vue';
+  </script>
 
 
 <template>
-  <h1 class="test">{{title}}</h1>
+  <header>
+    <Headbar/>
+  </header>
+  <main class="grid grid-cols-1 gap-10 p-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <CardCom v-for ="item in items" v-bind = "item" />
+  </main>
 </template>
 
-<script >
+<script>
   export default {
     data() {
       return {
-        title: 'Hello, Vue'
+        items: []
       }
     },
-      
+
+    created() {
+      fetch('https://www.melivecode.com/api/attractions')
+        .then(res => res.json())
+        .then(result => {
+          this.items = result
+        })
+    }
   }
 </script>
-
-
-
