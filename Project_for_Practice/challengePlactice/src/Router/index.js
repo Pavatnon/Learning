@@ -2,14 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 
 let routes = [
     {
-      path: "/"  || "/Home",
+      path: "/",
       name: "Home",
       component: ()=> import('../components/Content/HomeView.vue')
     },
     {
       path: "/Home",
-      name: "Home",
-      component: ()=> import('../components/Content/HomeView.vue')
+      redirect: '/'
     },
     {
       path: "/JokeApp",

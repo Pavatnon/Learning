@@ -16,7 +16,7 @@
 </template>
 <script setup>
 import {ref} from 'vue';
-    const currentPage = ref();
+    const currentPage = ref(0);
     const appList = ref([
         'Home',
         'JokeApp',
