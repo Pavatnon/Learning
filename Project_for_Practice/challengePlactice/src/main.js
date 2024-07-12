@@ -14,6 +14,7 @@ import InputNumber from 'primevue/inputnumber';
 import Select from 'primevue/select';
 import Panel from 'primevue/panel';
 import Button from 'primevue/button';
+import InputText from 'primevue/inputtext';
 
 
 
@@ -28,6 +29,7 @@ const app = createApp(App)
 app.component('HeadNavbar', HeadNavbar);
 app.component('Select',Select);
 app.component('InputNumber',InputNumber);
+app.component('InputText',InputText);
 app.component('Panel',Panel);
 app.component('Button',Button);
 

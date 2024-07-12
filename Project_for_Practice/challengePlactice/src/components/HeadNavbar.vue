@@ -4,8 +4,7 @@
         <div class="flex flex-row w-auto justify-around ml-6 gap-4">
             <router-link v-for="(app, index) in appList" :key="index" :to="`/${app}`"
                         @click="currentPage = index"
-                        class="px-2 py-1 text-black bg-gray-200 rounded-[15px] font-bold hover:bg-gray-400 hover:px-3 transition-all"
-                        :class="{'bg-gray-400':currentPage === index}">
+                        class="px-2 py-1 text-black bg-gray-200 rounded-[15px] font-bold hover:bg-gray-400 hover:px-3 transition-all">
                 {{ app }}
             </router-link>
         </div >
@@ -16,8 +15,10 @@
     </div>
 </template>
 <script setup>
-import {ref} from 'vue';
-    const currentPage = ref(0);
+    import {ref,onMounted} from 'vue';
+    
+
+    const currentPage = ref();
     const appList = ref([
         'Home',
         'JokeApp',
