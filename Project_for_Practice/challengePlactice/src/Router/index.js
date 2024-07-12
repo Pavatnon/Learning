@@ -20,21 +20,6 @@ let routes = [
       name: "WeatherApp",
       component: ()=> import('../components/Content/WeatherApp.vue')
     },
-    {
-      path: "/BlockchainApp",
-      name: "BlockchainApp",
-      component: ()=> import('../components/Content/BlockchainApp.vue')
-    },
-    {
-      path: "/CocktailApp",
-      name: "CocktailApp",
-      component: ()=> import('../components/Content/CocktailApp.vue')
-    },
-    {
-      path: "/UVApp",
-      name: "UVApp",
-      component: ()=> import('../components/Content/UVApp.vue')
-    },
 ];
 const router = createRouter({
   history: createWebHistory(),
