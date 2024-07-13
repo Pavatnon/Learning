@@ -25,7 +25,21 @@
     return email.includes('@');
   }
   watch([fristName, lastName, email], () =>{
-    
+    isVali.value = false;
+    errors.value = {};
+  
+    if(!isValidName(fristName.value)){
+      errors.value.erFristname = "กรุณากรอก ชื่อ ให้ถูกต้อง";
+      isVali.value = true;
+    }
+    if(!isValidName(lastName.value)){
+      errors.value.erLastname = "กรุณากรอก นามสกุล ให้ถูกต้อง";
+      isVali.value = true;
+    }
+    if (!isValidEmail(email.value)) {
+      errors.value.erEmail = "กรุณากรอก email ให้ถูกต้อง";
+      isVali.value = true;
+    }
   })
   const fullName = computed(()=>{
     return `${showfristName.value} ${showlastName.value}`
@@ -49,13 +63,13 @@
         <p style="text-align: center; font-size: 30px;">SubmitFrom</p>
         <p>Fristname</p>
         <input type="text" name="fristname" v-model="fristName">
-        <p class="vali" v-if="isVali">กรุณากรอก ชื่อ ให้ถูกต้อง</p>
+        <p class="vali" v-if="errors.erFristname">{{errors.erFristname}}</p>
         <p>Lasttname</p>
         <input type="text" name="lastname"  v-model="lastName">
-        <p class="vali"  v-if="isVali">กรุณากรอก นามสกุล ให้ถูกต้อง</p>
+        <p class="vali"  v-if="errors.erLastname">{{ errors.erLastname }}</p>
         <p >Email</p>
         <input type="text" name="email"  v-model="email">
-        <p class="vali"  v-if="isVali">กรุณากรอก email ให้ถูกต้อง</p>
+        <p class="vali"  v-if="errors.erEmail">{{errors.erEmail}}</p>
 
         <div class="saveBtn">
           <button :disabled="isVali" @click="editVal(fristName,lastName,email)">SaveEdit</button>
