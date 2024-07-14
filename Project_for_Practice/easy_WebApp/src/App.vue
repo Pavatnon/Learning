@@ -1,138 +1,154 @@
 <script setup>
-  import { ref, onMounted, watch, computed } from 'vue';
-  const fristName = ref('ชื่อ');
-  const lastName = ref('นามสกุล');
-  const email = ref('test@MediaList.com');
+  import { ref, onMounted, computed, watch } from 'vue';
+
+  const fristName = ref('testName');
+  const lastName = ref('testLastname');
+  const email = ref('test@Email.com');
 
   const showfristName = ref('');
   const showlastName = ref('');
-  const showEmail = ref('');
-  
+  const showemail = ref('');
+
+  const isValid = ref(false);
   const errors = ref({});
-  const isVali = ref(false);
-  const loaded = ref(false);
-  const completed =ref(false);
+
+  const isLoad = ref(false);
+  const iscomplete = ref(false);
+
   onMounted(()=>{
     showfristName.value = fristName.value;
     showlastName.value = lastName.value;
-    showEmail.value = email.value;
+    showemail.value = email.value;
   })
-  const isValidName = (name) => {
-    const re = /\d/;
-    return !re.test(name);
+  watch([fristName, lastName, email],()=>{
+    isValid.value = false;
+    errors.value = {};
+    if (!nameValid(fristName.value)) {
+      isValid.value = true;
+      errors.value.erName = 'กรอกชื่อให้ถูกต้อง'
+    }
+    if (!nameValid(lastName.value)) {
+      isValid.value = true;
+      errors.value.erLast = 'กรอกนามสกุลให้ถูกต้อง'
+    }
+    if (!emailValid(email.value)) {
+      isValid.value = true;
+      errors.value.erMail = 'กรอกEmailให้ถูกต้อง'
+    }
+    
+  })
+
+
+  const nameValid = (name) => {
+    let res = /\d/;
+    return !res.test(name);
   }
-  const isValidEmail= (email) => {
+  const emailValid = (email) =>{
     return email.includes('@');
   }
-  watch([fristName, lastName, email], () =>{
-    isVali.value = false;
-    errors.value = {};
-  
-    if(!isValidName(fristName.value)){
-      errors.value.erFristname = "กรุณากรอก ชื่อ ให้ถูกต้อง";
-      isVali.value = true;
-    }
-    if(!isValidName(lastName.value)){
-      errors.value.erLastname = "กรุณากรอก นามสกุล ให้ถูกต้อง";
-      isVali.value = true;
-    }
-    if (!isValidEmail(email.value)) {
-      errors.value.erEmail = "กรุณากรอก email ให้ถูกต้อง";
-      isVali.value = true;
-    }
-  })
   const fullName = computed(()=>{
-    return `${showfristName.value} ${showlastName.value}`
+    return `${showfristName.value} ${showlastName.value}`;
   })
-  const editVal = async(inName, inLast, inEmail)=>{
-    loaded.value = true;
-    completed.value = false;
-    await(new Promise(resolve => setTimeout (resolve,2000)));
-    loaded.value = false;
-    completed.value = true;
-    if (completed.value) {
-      showfristName.value = inName;
-      showlastName.value = inLast;
-      showEmail.value = inEmail;
-    }
-  };
-</script>
-<template>
-  <div class="container">
-    <label for="submit" class="from">
-        <p style="text-align: center; font-size: 30px;">SubmitFrom</p>
-        <p>Fristname</p>
-        <input type="text" name="fristname" v-model="fristName">
-        <p class="vali" v-if="errors.erFristname">{{errors.erFristname}}</p>
-        <p>Lasttname</p>
-        <input type="text" name="lastname"  v-model="lastName">
-        <p class="vali"  v-if="errors.erLastname">{{ errors.erLastname }}</p>
-        <p >Email</p>
-        <input type="text" name="email"  v-model="email">
-        <p class="vali"  v-if="errors.erEmail">{{errors.erEmail}}</p>
 
-        <div class="saveBtn">
-          <button :disabled="isVali" @click="editVal(fristName,lastName,email)">SaveEdit</button>
+  const isUpdate = async(name, lastname, email) => {
+    isLoad.value = true;
+    iscomplete.value = false;
+
+    await new Promise((resolve) => {
+      setTimeout(resolve, 2000);
+    }).then(()=>{
+      isLoad.value = false;
+      iscomplete.value = true;
+
+      if (iscomplete.value) {
+      showfristName.value = name;
+      showlastName.value = lastname;
+      showemail.value = email;
+    }
+    });
+  }
+</script>
+
+<template>
+    <div class="container">
+      <div class="from">
+        <h1>Submitfrom</h1>
+        <div class="inputarea">
+          <p>Ftistname</p>
+          <input type="text" v-model="fristName">
+          <p class="error" v-if="errors">{{ errors.erName }}</p>
+          <p>Lastname</p>
+          <input type="text"  v-model="lastName">
+          <p class="error" v-if="errors">{{ errors.erLast }}</p>
+          <p>Email</p>
+          <input type="text" v-model="email">
+          <p class="error" v-if="errors">{{ errors.erMail }}</p>
+          <div class="Ui">
+            <button :disabled="isValid" @click="isUpdate(fristName,lastName,email)">Update</button>
+            <div>
+              <div v-if="isLoad">Loadind...</div>
+              <div v-if="iscomplete">Update Completed</div>
+            </div>
+          </div>
         </div>
-        <div v-if="loaded" class="loader">Loadding...</div>
-        <div v-if="completed" class="complete">Complete</div>
-    </label>
-    <div class="output">
-      <p>Name: {{ fullName }}</p>
-      <p>Email: {{ showEmail }}</p>
+      </div>
+      <div class="output">
+        <h1>Profile</h1>
+        <div class="outarea">
+          <p>Name: {{ fullName }}</p>
+          <p>Email: {{ showemail }} </p>
+        </div>
+      </div>
     </div>
-  </div>
 </template>
 <style scoped>
   .container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 100vh;
+  }
+  .from {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 15px;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .output {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  .inputarea > input {
+    width: 100%;
+    padding-inline: 10px;
+  }
+  .inputarea > p {
+    align-self: self-start;
+  }
+  .inputarea {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    width: 320px;
+    border: 1px  solid gray;
+    border-radius: 15px;
+  }
+  .Ui {
     margin-top: 20px;
   }
-  .from{
-    background-color: rgba(128, 128, 128, 0.322);
-    border-radius: 15px;
-    width: 320px;
-    padding: 20px;
+  .Ui > div{
+    margin-top: 20px;
   }
-  input{
-    height: 30px;
-    border-radius: 15px;
-    padding-inline:15px ;
-    width: 280px;
-    border: none;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.253);
-  }
-  p{
-    padding-left: 10px;
-    font-weight: bold;
-    font-size: 25px;
-  }
-  .saveBtn{
-    text-align: center;
-    margin-top: 15px;
-  }
-  .saveBtn > button{
-    padding: 5px 20px 5px;
-    border-radius: 15px;
-    border: none;
-    background-color: rgba(147, 255, 114, 0.973);
-
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.253);
-  }
-  .saveBtn > button:hover{
-    background-color: rgba(98, 247, 52, 0.973);
-  }
-  .output{
+  .outarea {
     display: flex;
     flex-direction: column;
     width: 320px;
-    
+    font-size: 20px;
   }
-  .vali{
-    font-size: 12px;
+  .error {
+    font-size: 15px;
     color: red;
   }
 </style>
