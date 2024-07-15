@@ -10,7 +10,7 @@ export const useBookStore = defineStore('user',{
       this.booklist.push(bookData);
     },
     DeleteBook(index){
-      this.booklist.shift(this.booklist[index]);
+      this.booklist.splice(index,1);
     }
   }
 });

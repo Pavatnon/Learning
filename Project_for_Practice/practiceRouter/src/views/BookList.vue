@@ -1,7 +1,14 @@
 <script setup>
     import {useBookStore} from '../stores/BookData'
     import { RouterLink } from 'vue-router';
+    import { ref, onMounted } from 'vue';
+
     const bookData = useBookStore();
+    const bookcolleted = ref([{bookname:'', bookauthor:''}]);
+
+    onMounted(()=>{
+        bookcolleted.value = bookData.booklist;
+    })
 
 
 </script>
@@ -12,13 +19,13 @@
         </div>
         <div  v-if="bookData.booklist.length - 1 !== 0" class="booklist">
             <RouterLink 
-                v-for="(book, index) in bookData.booklist.length - 1" 
+                v-for="(book, index) in bookcolleted.length - 1" 
                 :key="book.id"
                 :to = "{name: 'BookDetail' , params: {id: index + 1}}">
                 <button>
                     <div class="card">
-                        <h1>{{bookData.booklist[index + 1].bookname}}</h1>
-                        <h3>{{bookData.booklist[index + 1].bookauthor}}</h3>
+                        <h1>{{bookcolleted[index + 1].bookname}}</h1>
+                        <h3>{{bookcolleted[index + 1].bookauthor}}</h3>
                     </div>
                 </button>
             </RouterLink>

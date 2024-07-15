@@ -6,6 +6,7 @@ import { ref } from 'vue';
 const route = useRoute();
 const bookData = useBookStore();
 const id = ref(route.params.id);
+
 </script>
 <template>
     <div class="container">
