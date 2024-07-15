@@ -1,5 +1,6 @@
 <script setup>
     import {useBookStore} from '../stores/BookData'
+    import { RouterLink } from 'vue-router';
     const bookData = useBookStore();
 
 
@@ -10,10 +11,17 @@
             <h1>Booklist</h1>
         </div>
         <div  v-if="bookData.booklist.length - 1 !== 0" class="booklist">
-            <div v-for="(book, index) in bookData.booklist.length - 1" :key="index" class="card">
-                <h1>{{bookData.booklist[index + 1].bookname}}</h1>
-                <h3>{{bookData.booklist[index + 1].bookauthor}}</h3>
-            </div>
+            <RouterLink 
+                v-for="(book, index) in bookData.booklist.length - 1" 
+                :key="book.id"
+                :to = "{name: 'BookDetail' , params: {id: index + 1}}">
+                <button>
+                    <div class="card">
+                        <h1>{{bookData.booklist[index + 1].bookname}}</h1>
+                        <h3>{{bookData.booklist[index + 1].bookauthor}}</h3>
+                    </div>
+                </button>
+            </RouterLink>
         </div>
         <div class="noti" v-else>
             <h2>Empty BookList</h2>

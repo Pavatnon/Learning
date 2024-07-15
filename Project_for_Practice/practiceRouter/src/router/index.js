@@ -19,7 +19,13 @@ const router = createRouter({
       name: 'DeleteBook',
       component: ()=> import('../views/DeleteBook.vue')
     },
+    {
+      path: '/bookdetail/:id',
+      name: 'BookDetail',
+      component: ()=> import('../views/ฺBookDetail.vue'),
+      props:true
+    },
   ]
-})
+});
 
 export default router

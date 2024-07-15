@@ -9,8 +9,8 @@ export const useBookStore = defineStore('user',{
     addBookData(bookData){
       this.booklist.push(bookData);
     },
-    // DeleteBook(bookData){
-    //   this.booklist.shift(bookData);
-    // }
+    DeleteBook(index){
+      this.booklist.shift(this.booklist[index]);
+    }
   }
 });
