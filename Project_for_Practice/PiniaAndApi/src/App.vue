@@ -4,7 +4,9 @@
 
 
 <template>
-  <RouterView />
+  <div class="max-w-3xl mx-auto mt-4">
+    <RouterView />
+  </div>
 </template>
 
 <style scoped></style>
