@@ -1,8 +1,18 @@
 <script setup>
-    import {UseUserProductStore} from '@/stores/user/product'
+    import {useCartStore} from '@/stores/user/cart'
     
     
-    const productStore = UseUserProductStore();
+    const useCartstore = useCartStore();
+
+
+    const hadleRemoveCart = (index) =>{
+        useCartstore.remoneItem(index);
+    }
+    const changeQuantity = (event, index) =>{
+        const newQuantity = parseInt(event.target.value);
+        useCartstore.updateQuantity(index, newQuantity);
+    }
+
 </script>
 <template>
     <Userlayout>
@@ -10,40 +20,58 @@
             Shoping Cart
         </div>
         <div class="container mx-auto">
-            <div class="flex flex-row">
-                <div class="flex-auto w-64 text-2xl font-medium bg-base-200 p-4">
-                    <div class="flex">
+            <div class="flex flex-row my-4">
+                <div class="flex-auto w-64 text-2xl font-medium bg-base-200 p-4 divide-y divide-gray-400">
+                    <div v-if="useCartstore.cartList.length === 0" class="flex w-full h-full justify-center items-center">
+                        <p class="text-3xl font-bold ">Cart is Empy.</p>
+                    </div>
+                    <div v-else v-for="cartItem,index in useCartstore.cartList" class="flex " >
                         <div class="flex-1">
-                            <img class="w-full p-4" src="https://picsum.photos/seed/picsum/500/300">
+                            <img class="w-full h-full p-4" :src="cartItem.imageURL">
                         </div>
                         <div class="flex-1 relative">
                             <div class="grid grid-cols-2 p-4 h-full">
                                 <div class="flex flex-col justify-between">
                                     <div class="text-xl">
-                                        <p class="font-bold">name</p>
-                                        <p class="text-gray-600">descripttion</p>
-                                        <p class="text-gray-600">price</p>
+                                        <p class="font-bold">{{cartItem.name}}</p>
+                                        <p class="text-gray-600">{{cartItem.about}}</p>
+                                        <p class="text-gray-600">{{ cartItem.price }}</p>
                                     </div>
-                                    <p class="text-xl font-bold">status</p>
+                                    <p class="text-xl font-bold">{{cartItem.status}}</p>
                                 </div>
                                 <div>
-                                    <select class="select select-bordered w-1/2">
-                                        <option v-for="num in 8">{{num}}</option>
+                                    <select class="select select-bordered w-1/2" @change="changeQuantity($event, index)">
+                                        <option v-for="quantity in [1,2,3,4,5]">{{quantity}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="absolute top-0 right-0">
-                                <button class="btn btn-ghost">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="20" height="20">
-                                        <!-- !Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-                                        <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
-                                    </svg>  
+                                <button class="btn btn-ghost" @click="hadleRemoveCart(index)">
+                                    <Xmark />
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="flex-auto w-32 text-2xl font-medium bg-slate-200 p-4">Summary
+                <div class="flex-auto w-32 text-2xl font-medium bg-slate-200 p-4">
+                    <div class="flex flex-col">
+                       <h1 class="font-bold">Order Summary</h1>
+                       <div class="flex flex-col p-4 text-xl divide-y divide-gray-400">
+                            <div class="flex justify-between py-4">
+                                <p>รวมสินค้าทั้งหมด</p>
+                                <p>{{useCartstore.summaryPrice}}</p>
+                            </div>
+                           <div class="flex justify-between py-4">
+                                <p>ค่าส่ง</p>
+                                <p>0</p>
+                            </div>
+                           <div class="flex justify-between py-4">
+                                <p>ราคาทั้งสิ้น</p>
+                                <p>{{useCartstore.summaryPrice}}</p>
+                            </div>
+                       </div>
+                       <button class="btn btn-neutral my-4">ชำระเงิน</button>
+                    </div>
 
                 </div>
             </div>
