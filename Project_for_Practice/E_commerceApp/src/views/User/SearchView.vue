@@ -9,9 +9,8 @@
     const searchText = ref('')
     
 
-    watch(()=> [route.query.q, checkListitem], (newSearchText) => {
+    watch(()=> route.query.q, (newSearchText) => {
         searchText.value = newSearchText[0];
-        console.log(checkListitem)
     }, {immediate: true});
 
     const filterItem = computed(()=>{
@@ -23,11 +22,11 @@
         <div class="ml-10 my-4 text-3xl">
                 <span class="font-bold">Search : </span> {{searchText}}
             </div>
-        <div v-if="filterItem">
+        <div>
             <Product :products="filterItem">
             </Product>
         </div>
-        <div v-else class="ml-10 my-4 text-3xl font-bold h-full">
+        <div class="ml-10 my-4 text-3xl font-bold h-full">
            product is not found!
         </div>
     </Userlayout>
