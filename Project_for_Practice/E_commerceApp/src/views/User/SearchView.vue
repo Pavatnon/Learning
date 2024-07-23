@@ -12,7 +12,7 @@
     
 
     watch(()=> route.query.q, (newSearchText) => {
-        searchText.value = newSearchText[0];
+        searchText.value = newSearchText;
     }, {immediate: true});
 
     const filterItem = computed(()=>{

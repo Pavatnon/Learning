@@ -1,5 +1,6 @@
 <script setup>
     import {useCartStore} from '@/stores/user/cart'
+    import { RouterLink } from 'vue-router';
     
     
     const useCartstore = useCartStore();
@@ -40,7 +41,7 @@
                                     <p class="text-xl font-bold">{{cartItem.status}}</p>
                                 </div>
                                 <div>
-                                    <select class="select select-bordered w-1/2" @change="changeQuantity($event, index)">
+                                    <select v-model="cartItem.quantity" class="select select-bordered w-1/2" @change="changeQuantity($event, index)">
                                         <option v-for="quantity in 10">{{quantity}}</option>
                                     </select>
                                 </div>
@@ -70,7 +71,9 @@
                                 <p>{{useCartstore.summaryPrice}}</p>
                             </div>
                        </div>
-                       <button class="btn btn-neutral my-4">ชำระเงิน</button>
+                       
+                           <RouterLink :to="{name:'checkout'}" class="btn btn-neutral my-4">ชำระเงิน</RouterLink>
+                       
                     </div>
 
                 </div>

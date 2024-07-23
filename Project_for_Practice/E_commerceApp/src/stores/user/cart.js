@@ -1,9 +1,11 @@
 import {defineStore} from 'pinia'
 import { parse } from 'vue/compiler-sfc';
+import { jsx } from 'vue/jsx-runtime';
 
 export const useCartStore = defineStore('cart',{
     state:()=>({
-        cartList: []
+        cartList: [],
+        checkOut:{}
 
     }),
     getters:{
@@ -27,8 +29,15 @@ export const useCartStore = defineStore('cart',{
             }
         },
         addToCart(productData){
-            productData.quantity = 1;
-            this.cartList.push(productData);
+            const findProduct = this.cartList.findIndex((item) => item.name === productData.name)
+
+            if (findProduct < 0) {
+                productData.quantity = 1;
+                this.cartList.push(productData);
+            }else{
+                const currentItem = this.cartList[findProduct];
+                this.updateQuantity(findProduct, currentItem.quantity + 1);
+            }
 
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
@@ -39,6 +48,24 @@ export const useCartStore = defineStore('cart',{
         remoneItem(index){
             this.cartList.splice(index,1);
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
+        },
+        placeOder(userData){
+            const orderData = {
+                ...userData,
+                totalPrice : this.summaryPrice,
+                paymentMehtod: 'Credit card',
+                orderDate: (new Date).toLocaleDateString(),
+                orderNumber: `AA${Math.floor((Math.random()*90000)+10000)}`,
+                product: this.cartList
+            }
+            localStorage.setItem('order-checkout', JSON.stringify(orderData));
+        },
+        loadCheckOut(){
+            const ordertData = localStorage.getItem('order-checkout');
+            if (ordertData) {
+                this.checkOut = JSON.parse(ordertData);
+            }
         }
+        
     }
 })
