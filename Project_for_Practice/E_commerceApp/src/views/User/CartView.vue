@@ -41,7 +41,7 @@
                                 </div>
                                 <div>
                                     <select class="select select-bordered w-1/2" @change="changeQuantity($event, index)">
-                                        <option v-for="quantity in [1,2,3,4,5]">{{quantity}}</option>
+                                        <option v-for="quantity in 10">{{quantity}}</option>
                                     </select>
                                 </div>
                             </div>

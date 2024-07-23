@@ -1,9 +1,16 @@
 <script setup>
-import Product from '@/components/Product.vue'
+    import Product from '@/components/Product.vue'
 
-import {UseUserProductStore} from '@/stores/user/product'
+    import {UseUserProductStore} from '@/stores/user/product'
+    import {useCartStore} from '@/stores/user/cart'
 
-const productStore = UseUserProductStore();
+    const cartStore = useCartStore();
+    const productStore = UseUserProductStore();
+    
+    const handleAddtoCart = (product) =>{
+        cartStore.addToCart(product);
+    }
+
 
 </script>
 <template>
@@ -22,7 +29,9 @@ const productStore = UseUserProductStore();
         </div>
 
         <!-- Item Shelf -->
-        <Product :products="productStore.list"></Product>
+        <Product :products="productStore.list"
+                :handleAddtoCart = "handleAddtoCart">
+                </Product>
 
     </Userlayout>
 </template>

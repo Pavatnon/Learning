@@ -1,17 +1,9 @@
 import {defineStore} from 'pinia'
+import { parse } from 'vue/compiler-sfc';
 
 export const useCartStore = defineStore('cart',{
     state:()=>({
-        cartList: [{
-            name:'test',
-            imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-            quantity:10,
-            about:'testt',
-            status:'open',
-            price: 100,
-            quantity:1
-            
-        }],
+        cartList: []
 
     }),
     getters:{
@@ -27,14 +19,26 @@ export const useCartStore = defineStore('cart',{
         }
     },
     actions:{
+        loadCart(){
+            const previousCart = localStorage.getItem('cart-data');
+
+            if(previousCart){
+                this.cartList = JSON.parse(previousCart);
+            }
+        },
         addToCart(productData){
+            productData.quantity = 1;
             this.cartList.push(productData);
+
+            localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
         updateQuantity(index,quantity){
             this.cartList[index].quantity = quantity;
+            localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
         remoneItem(index){
             this.cartList.splice(index,1);
+            localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         }
     }
 })
