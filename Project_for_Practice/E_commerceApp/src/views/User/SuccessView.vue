@@ -1,12 +1,13 @@
 <script setup>
     import {useCartStore} from '@/stores/user/cart'
     import {ref, onMounted } from 'vue';
+    
     const useCartstore = useCartStore();
     const orderData = ref({});
+
     onMounted(()=>{
         useCartstore.loadCheckOut();
         orderData.value = useCartstore.checkOut;
-        console.log(orderData.value)
     })
 
 </script>

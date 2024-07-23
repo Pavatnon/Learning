@@ -31,6 +31,9 @@
     const logoutHandle = () =>{
         isLogin.value = false;
         localStorage.removeItem('login');
+        localStorage.removeItem('order-checkout');
+        localStorage.removeItem('cart-data');
+        window.location.reload();
     }
     const loginhadle = () =>{
         isLogin.value = true;
