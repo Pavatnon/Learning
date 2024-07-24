@@ -9,7 +9,6 @@
     onMounted(()=>{
         cartStore.loadOrderCheckout();
         oderData.value = cartStore.checkout;
-        console.log(oderData.value);
     })
 </script>
 <template>

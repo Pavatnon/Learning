@@ -60,6 +60,7 @@ export const useCartStore = defineStore('cart',{
 
             localStorage.setItem('oder-checkout', JSON.stringify(orderData));
             localStorage.removeItem('cart-Item');
+            window.location.reload();
         },
         loadOrderCheckout(){
             const orderData = localStorage.getItem('oder-checkout');
