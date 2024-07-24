@@ -1,9 +1,13 @@
 <script setup>
     import {useProductStore} from '@/stores/product';
+    import { useCartStore} from '@/stores/cart';
 
     const productStore = useProductStore();
+    const cartStore = useCartStore();
 
-
+    const handleaddCrat = (product) =>{
+        cartStore.addToCart(product);
+    }
 </script>
 <template>
     <UserLayout>
@@ -23,7 +27,8 @@
 
         <!-- Shop Shlf --> 
         <h1 class="container mx-auto my-4 text-3xl font-bold text-center">Shop Shelf</h1>
-        <Product :products = "productStore.productList">
+        <Product :products = "productStore.productList"
+                :addCart = "handleaddCrat">
         </Product>
         
     </UserLayout>

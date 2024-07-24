@@ -3,6 +3,7 @@
 
     defineProps({
         products : [],
+        addCart : Function
     })
 </script>
 <template>
@@ -10,14 +11,13 @@
         <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">   
             <div v-for="product in products" class="card bg-base-100 w-full shadow-xl">
             <figure>
-                <img :src="product.imgURL"
-                    alt="Shoes" />
+                <img :src="product.imgURL"/>
             </figure>
             <div class="card-body">
                 <h2 class="card-title font-bold">{{ product.name }}</h2>
                 <p class="text-gray-500">{{ product.about }}</p>
                 <div class="card-actions justify-end">
-                    <button class="btn btn-primary">Buy Now</button>
+                    <button class="btn btn-primary" @click = "addCart(product)">Add Cart</button>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ export const useProductStore = defineStore('product',{
         {
             name:'Test1',
             imgURL:'https://picsum.photos/id/238/300/300',
-            quantity:5,
+            instock:5,
             price:100,
             about:'About Test1',
             status:'inStock',
@@ -16,7 +16,7 @@ export const useProductStore = defineStore('product',{
         {
             name:'Test2',
             imgURL:'https://picsum.photos/id/237/300/300',
-            quantity:5,
+            instock:5,
             price:100,
             about:'About Test2',
             status:'inStock',
@@ -25,7 +25,7 @@ export const useProductStore = defineStore('product',{
         {
             name:'Test3',
             imgURL:'https://picsum.photos/id/236/300/300',
-            quantity:5,
+            instock:5,
             price:100,
             about:'About Test3',
             status:'inStock',
@@ -34,7 +34,7 @@ export const useProductStore = defineStore('product',{
         {
             name:'Test4',
             imgURL:'https://picsum.photos/id/235/300/300',
-            quantity:5,
+            instock:5,
             price:100,
             about:'About Test4',
             status:'inStock',
@@ -43,7 +43,7 @@ export const useProductStore = defineStore('product',{
         {
             name:'Test5',
             imgURL:'https://picsum.photos/id/233/300/300',
-            quantity:5,
+            instock:5,
             price:100,
             about:'About Test5',
             status:'inStock',

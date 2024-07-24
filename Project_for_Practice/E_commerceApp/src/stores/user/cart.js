@@ -1,6 +1,5 @@
 import {defineStore} from 'pinia'
-import { parse } from 'vue/compiler-sfc';
-import { jsx } from 'vue/jsx-runtime';
+
 
 export const useCartStore = defineStore('cart',{
     state:()=>({
