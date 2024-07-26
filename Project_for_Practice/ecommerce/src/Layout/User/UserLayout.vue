@@ -2,11 +2,13 @@
     import {ref, onMounted} from 'vue';
     import { RouterLink, useRouter } from "vue-router";
     import { useCartStore } from '@/stores/cart';
+    import { useProfileStore } from '@/stores/profile';
 
     const router = useRouter();
     const isLogin = ref(false);
 
     const cartStore = useCartStore();
+    const profileStore = useProfileStore();
 
     const searchText = ref('');
 
@@ -84,8 +86,7 @@
                     <div v-if="isLogin" class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">
-                                <img alt="Tailwind CSS Navbar component"
-                                    src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                                <img :src="profileStore.userProfile.profileURL" />
                             </div>
                         </div>
                         <ul tabindex="0"
