@@ -1,5 +1,5 @@
 <script setup>
-
+    import {ref} from 'vue'
 
     const tableColumns = [
         'Name',
@@ -7,8 +7,21 @@
         'Price',
         'Quantity',
         'Status',
-        'Update Atc',
+        'Update At',
     ]
+
+    const products = ref([
+        {
+            name: 'test',
+            img: 'https://picsum.photos/id/235/200/200',
+            price: 200,
+            quantity: 20,
+            remainQuantity: 11,
+            status: 'open',
+            updateAt: (new Date()).toLocaleDateString()
+        },
+        
+    ])
 </script>
 <template>
     <Adminlayout>
@@ -25,13 +38,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for= "product in 5" class="text-lg text-center">
-                        <td class="font-bold">name</td>
-                        <td>img</td>
-                        <td>100</td>
-                        <td>0/20</td>
-                        <td>status</td>
-                        <td></td>
+                    <tr v-for= "product in products" class="text-lg text-center">
+                        <th>{{ product.name }}</th>
+                        <td>
+                            <img class="w-20 mx-auto" :src="product.img">
+                        </td>
+                        <td>{{product.price}}</td>
+                        <td>{{ product.remainQuantity}}/{{ product.quantity }}</td>
+                        <td>{{product.status}}</td>
+                        <td>{{ product.updateAt }}</td>
                         <td>
                             <button class="btn btn-ghost">
                                 <EditIcon 
