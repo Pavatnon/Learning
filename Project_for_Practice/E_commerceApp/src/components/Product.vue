@@ -1,6 +1,6 @@
 <script setup>
     import { defineProps } from 'vue'
-    import {useCartStore} from '@/stores/user/cart'
+
     
 
     defineProps({
