@@ -51,12 +51,12 @@
                         </td>
                         <td>{{ product.updateAt }}</td>
                         <td>
-                            <button class="btn btn-ghost">
+                            <RouterLink :to="{name:'admin-products-update', params:{id:index}}" class="btn btn-ghost">
                                 <EditIcon 
                                     :Width = "20"
                                     :Height = "20"
                                     :Fill = "black" />
-                            </button>
+                            </RouterLink>
                             <button class="btn btn-ghost ml-2" @click="handleDeleteProduct(index)">
                                 <TrashIcon 
                                     :Width = "20"

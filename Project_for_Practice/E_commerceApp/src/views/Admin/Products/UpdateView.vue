@@ -1,6 +1,6 @@
 <script setup>
-    import { RouterLink, useRouter } from 'vue-router';
-    import { reactive } from 'vue';
+    import { RouterLink, useRouter, useRoute } from 'vue-router';
+    import { reactive, onMounted, ref } from 'vue';
     import { useAdminProductStore } from '@/stores/Admin/Product'
 
 
@@ -29,10 +29,31 @@
         },
     ]
 
+    const route = useRoute();
     const router = useRouter();
 
     const useAdminProduct = useAdminProductStore();
+    
+    const mode = ref('Create');
+    const productIndex = ref(-1);
 
+    onMounted(()=>{
+        if(route.params.id){
+            productIndex.value = parseInt(route.params.id);
+            mode.value = 'Edit'
+
+            const selectedProduct = useAdminProduct.getProduct(productIndex.value)
+
+           if(selectedProduct){
+                productData.name = selectedProduct.name
+                productData.price = selectedProduct.price
+                productData.img = selectedProduct.img
+                productData.quantity = selectedProduct.quantity
+                productData.about = selectedProduct.about
+                productData.status = selectedProduct.status
+           }
+        }
+    })
     const productData = reactive({
         name: '',
         price: 0,
@@ -42,15 +63,20 @@
         status: '',
     })
 
-    const addProduct = () =>{
-        useAdminProduct.addProduct(productData);
+    const updateProduct = () =>{
+        if(mode.value === 'Create'){
+            useAdminProduct.addProduct(productData);
+        }
+        if(mode.value === 'Edit'){
+            useAdminProduct.updateproduct(productIndex.value, productData)
+        }
         router.push({name:'admin-products-list'})
     }
 </script>
 <template>
     <Adminlayout>
         <div class="flex flex-col border p-4 shadow-xl w-full">
-            <h1 class="text-3xl font-bold">Create Product</h1>
+            <h1 class="text-3xl font-bold">{{mode}} Product</h1>
             <div class="divider"></div>
             <div class="grid grid-cols-2 my-4 mx-4 gap-10">
                 <label v-for="from in fromData" class="form-control w-full ">
@@ -80,8 +106,8 @@
                 <RouterLink :to="{name: 'admin-products-list'}" class="btn btn-ghost">
                     Back
                 </RouterLink>
-                <button @click="addProduct()" class="btn btn-neutral">
-                    Add
+                <button @click="updateProduct()" class="btn btn-neutral">
+                    {{mode}}
                 </button>
             </div>
         </div>
