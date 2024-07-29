@@ -1,5 +1,8 @@
 <script setup>
-    import {ref} from 'vue'
+    import {RouterLink} from 'vue-router'
+    import { useAdminProductStore } from '@/stores/Admin/Product'
+
+    const useAdminProduct = useAdminProductStore();
 
     const tableColumns = [
         'Name',
@@ -9,25 +12,12 @@
         'Status',
         'Update At',
     ]
-
-    const products = ref([
-        {
-            name: 'test',
-            img: 'https://picsum.photos/id/235/200/200',
-            price: 200,
-            quantity: 20,
-            remainQuantity: 11,
-            status: 'open',
-            updateAt: (new Date()).toLocaleDateString()
-        },
-        
-    ])
 </script>
 <template>
     <Adminlayout>
         <div class="flex flex-row w-11/12 mx-auto justify-between items-center">
             <p class="text-3xl font-bold" >Products</p>
-            <button class="btn btn-neutral">Add Product</button>
+            <RouterLink :to ="{name:'admin-products-create'}" class="btn btn-neutral">Add Product</RouterLink>
         </div>
         <div class="overflow-x-auto w-10/12 mx-auto my-8 border-t border-gray-300">
             <table class="table">
@@ -38,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for= "product in products" class="text-lg text-center">
+                    <tr v-for= "product in useAdminProduct.list" class="text-lg text-center">
                         <th>{{ product.name }}</th>
                         <td>
                             <img class="w-20 mx-auto" :src="product.img">
