@@ -70,9 +70,8 @@
                             <span class="label-text text-xl font-bold">Status</span>
                         </div>
                         <select v-model="productData.status" class="select select-bordered">
-                            <option disabled selected>Select Status</option>
-                            <option value="Open">Open</option>
-                            <option value="Close" >Close</option>
+                            <option value="open">Open</option>
+                            <option value="close" >Close</option>
                         </select>
                     </label>
                 </div>

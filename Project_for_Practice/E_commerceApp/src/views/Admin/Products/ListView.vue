@@ -1,8 +1,13 @@
 <script setup>
     import {RouterLink} from 'vue-router'
+    import { onMounted } from 'vue';
     import { useAdminProductStore } from '@/stores/Admin/Product'
 
     const useAdminProduct = useAdminProductStore();
+
+    onMounted(()=>{
+        useAdminProduct.loadProducts()
+    })
 
     const tableColumns = [
         'Name',
@@ -12,6 +17,10 @@
         'Status',
         'Update At',
     ]
+
+    const handleDeleteProduct = (index) =>{
+        useAdminProduct.removeProduct(index);
+    }
 </script>
 <template>
     <Adminlayout>
@@ -28,14 +37,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for= "product in useAdminProduct.list" class="text-lg text-center">
+                    <tr v-for= "(product, index) in useAdminProduct.list" class="text-lg text-center">
                         <th>{{ product.name }}</th>
                         <td>
                             <img class="w-20 mx-auto" :src="product.img">
                         </td>
                         <td>{{product.price}}</td>
                         <td>{{ product.remainQuantity}}/{{ product.quantity }}</td>
-                        <td>{{product.status}}</td>
+                        <td>
+                            <div :class="product.status === 'open' ? 'badge badge-success gap-2': 'badge badge-warning gap-2'">
+                                {{product.status}}
+                            </div>
+                        </td>
                         <td>{{ product.updateAt }}</td>
                         <td>
                             <button class="btn btn-ghost">
@@ -44,7 +57,7 @@
                                     :Height = "20"
                                     :Fill = "black" />
                             </button>
-                            <button class="btn btn-ghost ml-2">
+                            <button class="btn btn-ghost ml-2" @click="handleDeleteProduct(index)">
                                 <TrashIcon 
                                     :Width = "20"
                                     :Height = "20"
