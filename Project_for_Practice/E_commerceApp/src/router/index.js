@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import {useAccoutStore} from '@/stores/accout'
+
 
 
 const router = createRouter({
@@ -41,7 +43,7 @@ const router = createRouter({
 
     {
       path: '/admin',
-      name: 'admin-login',
+      name: 'login',
       component: () => import('../views/Admin/LoginView.vue')
     },
     {
@@ -93,8 +95,23 @@ const router = createRouter({
 
     
   ]
+})
 
-
+router.beforeEach(async (to,form,next)=>{
+  const accoutStore = useAccoutStore();
+  await accoutStore.checkAuth()
+  if(to.name.includes('admin') && !accoutStore.isAdmin){
+    next({
+      name:'home'
+    })
+  } else if(to.name === 'login' && accoutStore.isAdmin){
+    next({
+      name:'admin-dashboard'
+    })
+  }else{
+    next()
+  }
+  
 })
 
 export default router

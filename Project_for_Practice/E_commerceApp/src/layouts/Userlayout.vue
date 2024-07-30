@@ -1,23 +1,23 @@
 <script setup>
-    import {ref, onMounted} from 'vue';
+    import { ref, onMounted } from 'vue'
     import { RouterLink, useRouter } from 'vue-router'
     import {useCartStore} from '@/stores/user/cart'
     import {useProfileStore} from '@/stores/user/profile'
-    
-    
+    import {useAccoutStore} from '@/stores/accout'
+
+
+
+    const accoutStore = useAccoutStore();
     const useCartstore = useCartStore();
     const useProfile = useProfileStore();
 
     const router = useRouter();
-    const isLogin = ref(false);
+
+
     const serchText = ref('');
 
 
-    onMounted(()=>{
-        if (localStorage.getItem('login')) {
-            isLogin.value = true;
-        }
-    });
+   
 
     const searchHandle= (event) =>{
         if (event.key === 'Enter') {
@@ -30,16 +30,20 @@
         }
     }
     
-    const logoutHandle = () =>{
-        isLogin.value = false;
-        localStorage.removeItem('login');
-        localStorage.removeItem('order-checkout');
-        localStorage.removeItem('cart-data');
-        window.location.reload();
+    const logoutHandle = async () =>{
+        try {
+            await accoutStore.logout()
+            window.location.reload()
+        } catch (error) {
+            console.log('Login Error', error)
+        }
     }
-    const loginhadle = () =>{
-        isLogin.value = true;
-        localStorage.setItem('login', true)
+    const loginhadle = async () =>{
+        try {
+            await accoutStore.singInwithGoogle()
+        } catch (error) {
+            console.log('Login Error', error)
+        }
     }
 </script>
 <template>
@@ -78,10 +82,10 @@
                         </div>
                     </div>
 
-                    <div v-if="isLogin === false" class="items-center">
+                    <div v-if="accoutStore.isLoggedIn === false" class="items-center">
                         <button class="font-bold btn btn-ghost" @click="loginhadle()">Login</button>
                     </div>
-                    <div v-if="isLogin === true" class="dropdown dropdown-end">
+                    <div v-if="accoutStore.isLoggedIn === true" class="dropdown dropdown-end">
                         <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
                             <div class="w-10 rounded-full">
                                 <img :src = "useProfile.userProfile.userProfileURL" />

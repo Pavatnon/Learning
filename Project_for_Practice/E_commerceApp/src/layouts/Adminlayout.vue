@@ -1,7 +1,11 @@
 <script setup>
-    import {RouterLink, useRoute} from 'vue-router';
+    import {RouterLink,useRouter, useRoute} from 'vue-router';
+    import {useAccoutStore} from '@/stores/accout'
+
+    const accoutStore = useAccoutStore()
 
     const route = useRoute()
+    const router = useRouter()
 
 
     const menuList = [
@@ -21,12 +25,16 @@
             menu:'User',
             linkTo:'admin-user-list'
         },
-        {
-            menu:'Logout',
-            linkTo:'admin-login'
-        },
 
     ]
+    const handleAdminLogout = async () =>{
+        try {
+            await accoutStore.logout()
+            router.push({name:'login'})  
+        } catch (error) {
+            console.log('error', error)
+        }
+    }
 </script>
 <template>
     <div class="drawer drawer-open">
@@ -46,6 +54,9 @@
                         <RouterLink :class="menu.linkTo === route.name ? 'active' : ''" :to = "{name:menu.linkTo }">
                             {{menu.menu}}
                         </RouterLink>
+                </li>
+                <li>
+                    <button @click="handleAdminLogout" class="text-lg font-bold">Logout</button>
                 </li>
             </ul>
         </div>

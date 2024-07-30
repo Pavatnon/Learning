@@ -1,11 +1,31 @@
 <script setup >
-    import {RouterLink} from 'vue-router'
+    import {useRouter} from 'vue-router'
     import {ref} from 'vue'
+    import {useAccoutStore} from '@/stores/accout'
+    import {useEventStore} from '@/stores/event'
+
+    const accoutStore = useAccoutStore()
+    const eventStore = useEventStore()
+
+    const router = useRouter()
 
     const passwordShow = ref(false);
+    const adminPassword = ref('')
+    const adminEmail = ref('')
 
     const handePasswordShow = () =>{
         passwordShow.value = !passwordShow.value;
+    }
+
+    const handleAdminLogin = async() =>{
+        try {
+            await accoutStore.signInAdmin(adminEmail.value,adminPassword.value)
+            router.push({
+                name: 'admin-dashboard'
+            })
+        } catch (error) {
+            eventStore.popupMessage('error', `${error.message}`)
+        }
     }
 
 </script>
@@ -19,17 +39,17 @@
                     <div class="label">
                         <span class="label-text text-xl font-bold">Username</span>
                     </div>
-                    <input type="text" placeholder="Username" class="input input-bordered w-full " />
+                    <input type="text" placeholder="Username" class="input input-bordered w-full " v-model="adminEmail"/>
                     <div class="label">
                         <span class="label-text text-xl font-bold">Password</span>
                     </div>
                     <div class="join">
-                        <input :type="passwordShow === true ? 'text' : 'password'" placeholder="Password" class="input input-bordered w-full join-item" />
+                        <input :type="passwordShow === true ? 'text' : 'password'" placeholder="Password" class="input input-bordered w-full join-item"  v-model="adminPassword"/>
                         <button class="btn join-item w-12 btn-neutral" @click="handePasswordShow()">
                             <viewIcon :fillter = true />
                         </button>
                     </div>
-                    <RouterLink :to = "{name:'admin-dashboard'}" class="btn btn-neutral w-full mt-8">Login</RouterLink>
+                    <button @click="handleAdminLogin()" class="btn btn-neutral w-full mt-8">Login</button>
                 </label>
             </div>
         </div>
