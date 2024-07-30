@@ -1,12 +1,16 @@
 <script setup>
     import Product from '@/components/Product.vue'
-
+    import { onMounted } from 'vue';
     import {UseUserProductStore} from '@/stores/user/product'
     import {useCartStore} from '@/stores/user/cart'
 
     const cartStore = useCartStore();
     const productStore = UseUserProductStore();
     
+    onMounted(()=>{
+        productStore.loadProduct();
+    })
+
     const handleAddtoCart = (product) =>{
         cartStore.addToCart(product);
     }

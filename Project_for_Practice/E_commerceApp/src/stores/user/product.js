@@ -1,51 +1,19 @@
 import {defineStore} from 'pinia'
+import {collection, getDocs} from 'firebase/firestore'
+import {db} from '@/firebase'
 
 export const UseUserProductStore = defineStore('user-product', {
   state:()=>({
-    list:[
-      {
-        name:'test',
-        imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-        quantity:10,
-        about:'testt',
-        status:'open',
-        price: 100
-      },
-      {
-        name:'test note',
-        imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-        quantity:10,
-        about:'testt',
-        status:'open',
-        price: 100
-      },
-      {
-        name:'test note1',
-        imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-        quantity:10,
-        about:'testt',
-        status:'open',
-        price: 100
-      },
-      {
-        name:'test back',
-        imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-        quantity:10,
-        about:'testt',
-        status:'open',
-        price: 100
-      },
-      {
-        name:'test fall',
-        imageURL:'https://fastly.picsum.photos/id/849/200/200.jpg?hmac=LwsdGn2endKvoLY10FPqtfqKYCVMbPEp5J6S_tUN1Yg',
-        quantity:10,
-        about:'testt',
-        status:'open',
-        price: 100
-      },
-    ]
+    list:[]
   }),
   actions:{
+     async loadProduct(){
+        const productSnapshot = await getDocs(collection(db,'products'))
+        const products = productSnapshot.docs.map(doc => doc.data())
+        if (products.length > 0) {
+            this.list = products
+        }
+    },
     filterProduct ( searhText){
       return this.list.filter(item => item.name.includes(searhText));
     }
