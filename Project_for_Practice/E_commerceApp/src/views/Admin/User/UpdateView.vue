@@ -2,6 +2,9 @@
     import { onMounted, ref, reactive } from 'vue';
     import { useRoute,useRouter, RouterLink } from 'vue-router';
     import {useAdminUserStroe} from '@/stores/Admin/User'
+    import {useEventStore} from '@/stores/event'
+
+    const eventStore = useEventStore();
     const adminuserStore = useAdminUserStroe();
     const route = useRoute()
     const router = useRouter()
@@ -52,6 +55,7 @@
 
     const editUser = () =>{
         adminuserStore.updateUser(userId.value, fromData)
+        eventStore.popupMessage('info', 'User Update Secessful')
         router.push({name: 'admin-user-list'})
     }
 </script>

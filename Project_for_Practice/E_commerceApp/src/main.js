@@ -14,10 +14,12 @@ import ViewIcon from '@/components/Icon/viewIcon.vue'
 import TrashIcon from '@/components/Icon/TrashIcon.vue'
 import EditIcon from '@/components/Icon/EditIcon.vue'
 
+
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
+
 
 
 app.component('Xmark',XmarkIcon);
