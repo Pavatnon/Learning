@@ -5,8 +5,8 @@
 
     const useAdminProduct = useAdminProductStore();
 
-    onMounted(()=>{
-        useAdminProduct.loadProducts()
+    onMounted( async()=>{
+        await useAdminProduct.loadProducts()
     })
 
     const tableColumns = [
@@ -18,8 +18,14 @@
         'Update At',
     ]
 
-    const handleDeleteProduct = (index) =>{
-        useAdminProduct.removeProduct(index);
+    const handleDeleteProduct = async (productId) =>{
+        try {
+            await useAdminProduct.removeProduct(productId);
+            await useAdminProduct.loadProducts()    
+        } catch (error) {
+            console.log('error',error)
+        }
+        
     }
 </script>
 <template>
@@ -29,10 +35,10 @@
             <RouterLink :to ="{name:'admin-products-create'}" class="btn btn-neutral">Add Product</RouterLink>
         </div>
             <Table :headers = "tableColumns">
-                <tr v-for= "(product, index) in useAdminProduct.list" class="text-lg text-center">
+                <tr v-for= "product in useAdminProduct.list" class="text-lg text-center">
                         <th>{{ product.name }}</th>
                         <td>
-                            <img class="w-20 mx-auto" :src="product.img">
+                            <img class="w-20 mx-auto" :src="product.imageUrl">
                         </td>
                         <td>{{product.price}}</td>
                         <td>{{ product.remainQuantity}}/{{ product.quantity }}</td>
@@ -45,7 +51,7 @@
                         <td>
                             <div class="flex w-full justify-center">
                                 <div class="flex-1 text-end">
-                                    <RouterLink :to="{name:'admin-products-update', params:{id:index}}" class="btn btn-ghost">
+                                    <RouterLink :to="{name:'admin-products-update', params:{id:product.productId}}" class="btn btn-ghost">
                                         <EditIcon 
                                             :Width = "20"
                                             :Height = "20"
@@ -53,7 +59,7 @@
                                     </RouterLink>       
                                 </div>
                                 <div class="flex-1 text-start">
-                                    <button class="btn btn-ghost ml-2" @click="handleDeleteProduct(index)">
+                                    <button class="btn btn-ghost ml-2" @click="handleDeleteProduct(product.productId)">
                                         <TrashIcon 
                                             :Width = "20"
                                             :Height = "20"

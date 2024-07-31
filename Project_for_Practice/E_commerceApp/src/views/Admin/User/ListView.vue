@@ -1,9 +1,14 @@
 <script setup>
+    import { onMounted } from 'vue';
     import { RouterLink } from 'vue-router';
     import {useAdminUserStroe} from '@/stores/Admin/User'
 
     const adminuserStore = useAdminUserStroe();
 
+
+    onMounted(async ()=>{
+        await adminuserStore.loadUser()
+    })
     const tableHeader = [
         'Name',
         'Role',
@@ -13,10 +18,10 @@
     ]
 
 
-    const changeStatus = (index) =>{
+    const changeStatus = async (index) =>{
         let selectedUser = adminuserStore.list[index]
         selectedUser.status = selectedUser.status === 'active'? 'inactive' : 'active'
-        adminuserStore.updateUser(selectedUser)
+        await adminuserStore.updateUser(selectedUser.uid, selectedUser)
     }
 </script>
 <template>
@@ -33,11 +38,11 @@
                         {{ adminUser.status }}
                     </div>
                 </td>
-                <td>{{ adminUser.updateat }}</td>
+                <td>{{ adminUser.updateAt }}</td>
                 <td>
                     <div class="flex w-full justify-center">
                         <div class="flex-1 text-end">
-                            <RouterLink :to="{name: 'admin-user-update', params:{id:index}}" class="btn btn-ghost ml-2">
+                            <RouterLink :to="{name: 'admin-user-update', params:{id:adminUser.uid}}" class="btn btn-ghost ml-2">
                                 <EditIcon :Width="20" :Height="20" :Fill="black" />
                             </RouterLink>
                         </div>

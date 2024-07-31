@@ -1,30 +1,52 @@
 import { defineStore } from "pinia";
+import {db} from '@/firebase'
+import {    
+            getDocs,
+            doc,
+            collection,
+            getDoc,
+            setDoc
+        } from "firebase/firestore";
 
 export const useAdminUserStroe = defineStore('admin-user', {
     state: ()=>({
-        list:[
-            {
-                name: 'Non',
-                role:'admin',
-                status:'active',
-                updateat: (new Date).toLocaleDateString()
-            },
-        ]
-    }),
+        list:[ ]
+    }), 
     actions:{
-        getUser(index){
-            return this.list[index];
+        async loadUser(){
+            const userCol = collection(db, 'user')
+            const userSnapshot = await getDocs(userCol)
+            const userList = userSnapshot.docs.map((item) => {
+                let convertedUser = item.data()
+                convertedUser.uid = item.id
+                convertedUser.updateAt = (convertedUser.updateAt.toDate()).toDateString()
+                return convertedUser
+            })
+            this.list = userList
         },
-        updateUser(index, userData) {
-            const fileds = ['name','role','status']
-            
-            for(let filed of fileds){
-                this.list[index][filed] = userData[filed]
+        async getUser(uid){
+            try {
+                const userRef = doc(db,'user', uid)
+                const userSnapShot = await getDoc(userRef)
+                return userSnapShot.data()
+            } catch (error) {
+                console.log('Error', error)
             }
-            this.list[index].updateat = (new Date).toLocaleDateString()
         },
-        removeUser(index){
-            this.list.splice(index, 1)
+        async updateUser(uid, userData) {
+            try {
+                const updatedUser = {
+                    name: userData.name,
+                    status: userData.status,
+                    role: userData.role,
+                    updateAt: new Date
+                }
+                const docRef = doc(db, 'user', uid)
+                await setDoc(docRef, updatedUser)
+            } catch (error) {
+                console.log('error', error)
+            }
+            
         }
     }
     

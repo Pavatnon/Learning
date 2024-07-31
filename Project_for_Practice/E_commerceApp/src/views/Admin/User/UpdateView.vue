@@ -32,15 +32,16 @@
         },
     ]
 
-    onMounted(()=>{
+    onMounted( async()=>{
         if(route.params.id){
-            userId.value = parseInt(route.params.id)
-            selectedUser.value = adminuserStore.getUser(userId.value);
+            userId.value = route.params.id
+            selectedUser.value = await adminuserStore.getUser(userId.value);
 
             if(selectedUser.value){
                 fromData.name = selectedUser.value.name
                 fromData.role = selectedUser.value.role
                 fromData.status = selectedUser.value.status
+                fromData.updateAt = selectedUser.value.updateAt
             }
         }
 
@@ -53,8 +54,8 @@
     })
 
 
-    const editUser = () =>{
-        adminuserStore.updateUser(userId.value, fromData)
+    const editUser = async () =>{
+        await adminuserStore.updateUser(userId.value, fromData)
         eventStore.popupMessage('info', 'User Update Secessful')
         router.push({name: 'admin-user-list'})
     }

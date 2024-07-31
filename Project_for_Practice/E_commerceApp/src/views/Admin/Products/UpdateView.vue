@@ -17,7 +17,7 @@
         },
         {
             name:'Image',
-            filed:'img'
+            filed:'imageUrl'
         },
         {
             name:'Quantity',
@@ -37,21 +37,21 @@
     const mode = ref('Create');
     const productIndex = ref(-1);
 
-    onMounted(()=>{
+    onMounted(async ()=>{
         if(route.params.id){
-            productIndex.value = parseInt(route.params.id);
+            productIndex.value = route.params.id
             mode.value = 'Edit'
 
-            const selectedProduct = useAdminProduct.getProduct(productIndex.value)
+            const selectedProduct = await useAdminProduct.getProduct(productIndex.value)
 
-           if(selectedProduct){
-                productData.name = selectedProduct.name
-                productData.price = selectedProduct.price
-                productData.img = selectedProduct.img
-                productData.quantity = selectedProduct.quantity
-                productData.about = selectedProduct.about
-                productData.status = selectedProduct.status
-           }
+           
+            productData.name = selectedProduct.name
+            productData.price = selectedProduct.price
+            productData.imageUrl = selectedProduct.imageUrl
+            productData.quantity = selectedProduct.quantity
+            productData.about = selectedProduct.about
+            productData.status = selectedProduct.status
+         
         }
     })
     const productData = reactive({
@@ -63,14 +63,22 @@
         status: '',
     })
 
-    const updateProduct = () =>{
-        if(mode.value === 'Create'){
-            useAdminProduct.addProduct(productData);
+    const updateProduct = async() =>{
+        try {
+            if(mode.value === 'Create'){
+            await useAdminProduct.addProduct(productData);
+            }
+
+            if(mode.value === 'Edit'){
+                await useAdminProduct.updateproduct(productIndex.value, productData)
+            }
+
+            router.push({ name: 'admin-products-list' })
+        } catch (error) {
+            console.log('error', error)
         }
-        if(mode.value === 'Edit'){
-            useAdminProduct.updateproduct(productIndex.value, productData)
-        }
-        router.push({name:'admin-products-list'})
+        
+        
     }
 </script>
 <template>
