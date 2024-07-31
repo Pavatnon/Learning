@@ -23,7 +23,7 @@
         },
         {
             menu:'User',
-            linkTo:'admin-user-list'
+            linkTo:'admin-users'
         },
 
     ]

@@ -54,7 +54,7 @@ const router = createRouter({
 
     
     {
-      path: '/admin/products/list',
+      path: '/admin/products',
       name: 'admin-products-list',
       component: () => import('../views/Admin/Products/ListView.vue')
     },
@@ -71,8 +71,8 @@ const router = createRouter({
 
 
     {
-      path: '/admin/user/list',
-      name: 'admin-user-list',
+      path: '/admin/users/',
+      name: 'admin-users',
       component: () => import('../views/Admin/User/ListView.vue')
     },
     {
