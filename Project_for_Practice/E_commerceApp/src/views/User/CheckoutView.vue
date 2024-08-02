@@ -35,7 +35,7 @@
 
     const handleFrom = () =>{
         useCartstore.placeOder(userFromData);
-        router.push({name: 'success'});
+        // router.push({name: 'success'});
     }
 </script>
 <template>
@@ -61,7 +61,7 @@
                     <div class="flex flex-col">
                         <div v-for="cartIttem in useCartstore.cartList" class="flex bg-slate-300 p-4 m-1">
                             <div class="flex-auto p-4">
-                                <img class="w-full" :src="cartIttem.imageURL">
+                                <img class="w-full" :src="cartIttem.imageUrl">
                             </div>
                             <div class="flex-auto p-4">
                                 <div class="flex flex-col h-full justify-between">

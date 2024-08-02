@@ -6,6 +6,7 @@ import { createPinia } from 'pinia'
 import Userlayout from './layouts/Userlayout.vue'
 import Adminlayout from './layouts/Adminlayout.vue'
 import Table from './components/Table.vue'
+import Pagination from './components/Pagination.vue'
 
 import VueApexCharts from "vue3-apexcharts";
 
@@ -31,6 +32,7 @@ app.component('EditIcon',EditIcon);
 app.component('Userlayout',Userlayout);
 app.component('Adminlayout',Adminlayout);
 app.component('Table',Table);
+app.component('Pagination',Pagination);
 
 app.use(VueApexCharts);
 app.use(createPinia())

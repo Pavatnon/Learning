@@ -28,7 +28,7 @@
                     </div>
                     <div v-else v-for="cartItem,index in useCartstore.cartList" class="flex " >
                         <div class="flex-1">
-                            <img class="w-full h-full p-4" :src="cartItem.imageURL">
+                            <img class="w-full h-full p-4" :src="cartItem.imageUrl">
                         </div>
                         <div class="flex-1 relative">
                             <div class="grid grid-cols-2 p-4 h-full">

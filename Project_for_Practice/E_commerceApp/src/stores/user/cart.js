@@ -1,5 +1,14 @@
 import {defineStore} from 'pinia'
 
+import {
+    doc,
+    updateDoc,
+    increment,
+    writeBatch
+ } from "firebase/firestore";
+
+import { db } from "@/firebase";
+
 
 export const useCartStore = defineStore('cart',{
     state:()=>({
@@ -48,16 +57,30 @@ export const useCartStore = defineStore('cart',{
             this.cartList.splice(index,1);
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
-        placeOder(userData){
-            const orderData = {
-                ...userData,
-                totalPrice : this.summaryPrice,
-                paymentMehtod: 'Credit card',
-                orderDate: (new Date).toLocaleDateString(),
-                orderNumber: `AA${Math.floor((Math.random()*90000)+10000)}`,
-                product: this.cartList
+        async placeOder(userData){
+            try {
+                const orderData = {
+                    ...userData,
+                    totalPrice : this.summaryPrice,
+                    paymentMehtod: 'Credit card',
+                    orderDate: (new Date).toLocaleDateString(),
+                    orderNumber: `AA${Math.floor((Math.random()*90000)+10000)}`,
+                    product: this.cartList
+                }
+                const batch = writeBatch(db)
+                for (const product of orderData.product){
+                    const productRef = doc(db, 'products', product.productId)
+                    await  batch.update(productRef, {
+                        remainQuantity: increment(-1)
+                    })
+                } 
+
+                await batch.commit()
+                localStorage.setItem('order-checkout', JSON.stringify(orderData));
+            } catch (error) {
+                console.log('error', error)
             }
-            localStorage.setItem('order-checkout', JSON.stringify(orderData));
+           
         },
         loadCheckOut(){
             const ordertData = localStorage.getItem('order-checkout');

@@ -10,9 +10,9 @@ service cloud.firestore {
       allow read, write: if request.auth != null && (request.auth.uid == userId || isAdmin());
     }
 
-     match /products/{productId} {
+    match /products/{productId} {
       allow read: if (request.auth != null && isAdmin()) || (resource.data.status == 'open');
-      allow write: if (request.auth != null && isAdmin()) || (resource.data.status == 'open');
+      allow write: if (request.auth != null && isAdmin()) || (resource.data.status == 'open' && resource.data.remainQuantity > 0);
     }
   }
 }
