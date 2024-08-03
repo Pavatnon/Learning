@@ -5,18 +5,24 @@
     import {useProfileStore} from '@/stores/user/profile'
     import {useAccoutStore} from '@/stores/accout'
 
+    import {useEventStore} from '@/stores/event'
+
 
 
     const accoutStore = useAccoutStore();
     const useCartstore = useCartStore();
     const useProfile = useProfileStore();
 
+    const eventStore = useEventStore();
+
     const router = useRouter();
 
 
     const serchText = ref('');
 
-
+    onMounted(()=>{
+        eventStore.loadBanner()
+    })
    
 
     const searchHandle= (event) =>{
@@ -41,6 +47,7 @@
     const loginhadle = async () =>{
         try {
             await accoutStore.singInwithGoogle()
+            window.location.reload()
         } catch (error) {
             console.log('Login Error', error)
         }
@@ -103,7 +110,11 @@
             </div>
         </section>
 
-
+        <div v-if="eventStore.banner.display">
+            <a :href="eventStore.banner.link" target="_blank">
+                <img class="w-full":src="eventStore.banner.imageUrl">
+            </a>
+        </div>
         <!-- Contant -->
         <slot></slot>
 

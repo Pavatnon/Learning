@@ -1,15 +1,15 @@
 <script setup>
   import {RouterView} from 'vue-router'
   import { onMounted } from 'vue';
-  import {useCartStore} from '@/stores/user/cart'
+  import {UseUserProductStore} from '@/stores/user/product'
   import {useEventStore} from '@/stores/event'
 
+  const productStore = UseUserProductStore();
 
   const eventStore = useEventStore();
-  const cartStore = useCartStore();
 
   onMounted(()=>{
-    cartStore.loadCart();
+    productStore.loadProduct();
   })
 </script>
 <template>

@@ -1,13 +1,17 @@
 import {defineStore} from 'pinia'
 
+
 import {
     doc,
     updateDoc,
     increment,
     writeBatch
- } from "firebase/firestore";
+} from "firebase/firestore";
 
-import { db } from "@/firebase";
+
+import {onValue, ref, set} from 'firebase/database'
+import { db, realtimeDB } from "@/firebase";
+import {useAccoutStore} from '@/stores/accout'
 
 
 export const useCartStore = defineStore('cart',{
@@ -26,17 +30,34 @@ export const useCartStore = defineStore('cart',{
             return state.cartList.reduce((acc, item) =>{
                 return acc + (item.price * item.quantity);
             },0)
+        },
+        user(state){
+            const accoutStore = useAccoutStore()
+            return accoutStore.user
+        },
+        cartRef(state){
+            return ref(realtimeDB, `carts/${this.user.uid}`)
         }
     },
     actions:{
-        loadCart(){
-            const previousCart = localStorage.getItem('cart-data');
-
-            if(previousCart){
-                this.cartList = JSON.parse(previousCart);
+        async loadCart(){
+            if(this.user.uid){
+                onValue(this.cartRef, (snapshot) => {
+                    const data = snapshot.val()
+                    if(data){
+                        this.cartList = data
+                    }
+                }, (err) =>{
+                    console.log('err',err)
+                })
+            }else{
+                const previousCart = localStorage.getItem('cart-data');
+                if(previousCart){
+                    this.cartList = JSON.parse(previousCart);
+                }
             }
         },
-        addToCart(productData){
+        async addToCart(productData){
             const findProduct = this.cartList.findIndex((item) => item.name === productData.name)
 
             if (findProduct < 0) {
@@ -46,15 +67,18 @@ export const useCartStore = defineStore('cart',{
                 const currentItem = this.cartList[findProduct];
                 this.updateQuantity(findProduct, currentItem.quantity + 1);
             }
-
+            
+            await set(this.cartRef, this.cartList)
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
-        updateQuantity(index,quantity){
+        async updateQuantity(index,quantity){
             this.cartList[index].quantity = quantity;
+            await set(this.cartRef, this.cartList)
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
-        remoneItem(index){
+        async remoneItem(index){
             this.cartList.splice(index,1);
+            await set(this.cartRef, this.cartList)
             localStorage.setItem('cart-data', JSON.stringify(this.cartList));
         },
         async placeOder(userData){

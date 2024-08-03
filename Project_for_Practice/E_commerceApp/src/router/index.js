@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import {useAccoutStore} from '@/stores/accout'
+import {useCartStore} from '@/stores/user/cart'
 
 
 
@@ -100,6 +101,11 @@ const router = createRouter({
 router.beforeEach(async (to,form,next)=>{
   const accoutStore = useAccoutStore();
   await accoutStore.checkAuth()
+  
+  const cartStore = useCartStore()
+  await cartStore.loadCart()
+
+
   if(to.name.includes('admin') && !accoutStore.isAdmin){
     next({
       name:'home'
