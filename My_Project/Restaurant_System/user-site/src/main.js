@@ -11,6 +11,7 @@ import router from './router'
 import IconList from '@/components/Icon/IconList.vue'
 // main component
 import Leyout from '@/components/Leyout.vue'
+import ShowItem from '@/components/ShowItem.vue'
 
 const app = createApp(App)
 
@@ -21,5 +22,6 @@ app.use(router)
 app.component('IconList',IconList)
 // main component
 app.component('Leyout',Leyout)
+app.component('ShowItem',ShowItem)
 
 app.mount('#app')

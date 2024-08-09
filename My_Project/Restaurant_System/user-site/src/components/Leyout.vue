@@ -1,10 +1,15 @@
 <script setup>
     import { useRoute, useRouter } from 'vue-router'
+    import { onMounted } from 'vue';
 
     const router = useRouter()
     const route = useRoute()
 
     const menutype = [
+        {
+            type: 'รายการอาหารทั้งหมด'
+        },
+       
         {
             type: 'อาหารจานหลัก',
             subtype: ['อาหารจานเดี่ยว','เมนูทอด', 'เมนูย่าง', 'เมนูต้ม', 'เมนูนึ่ง']
@@ -19,8 +24,12 @@
         }
     ]
 
+    onMounted(()=>{
+        router.push({query:{type:'รายการอาหารทั้งหมด'}})
+    })
+
     const selectType = (type) =>{
-        router.push({name: 'menu', params:{id:type}})
+        router.push({query:{type:type}})
     }
 
     
@@ -72,14 +81,17 @@
                     ประเภทอาหาร
                 </div>
                 <li v-for="menu in menutype" :key="menu.type">
-                    <details class="dropdown">
+                    <details v-if="menu.subtype" class="dropdown">
                         <summary class="text-xl">{{ menu.type }}</summary>
                         <ul class="bg-base-100 rounded-box w-64 p-2">
-                            <li v-for="sub in menu.subtype" :key="sub">
-                                <a @click="selectType(sub)" class="text-lg" :class="route.params.id === sub? 'active': ''">{{ sub }}</a>
+                            <li v-for="submenu in menu.subtype" :key="submenu">
+                                <a @click="selectType(submenu)" class="text-lg" :class="route.query.type === submenu? 'active': ''">{{ submenu }}</a>
                             </li>
                         </ul>
                     </details>
+                    <div v-if="!menu.subtype" class="text-xl" :class="route.query.type === menu.type ?'active': ''">
+                        <summary @click="selectType('รายการอาหารทั้งหมด')" >{{ menu.type }}</summary>
+                    </div>
                 </li>
             </ul>
         </div>
